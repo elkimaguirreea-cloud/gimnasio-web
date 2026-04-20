@@ -7,12 +7,15 @@ const app = express();
 app.use(express.json());
 
 // 🧱 Conexión MySQL
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT
+  port: process.env.MYSQLPORT,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 // Crear tabla si no existe
@@ -91,4 +94,12 @@ app.listen(PORT, () => {
 // 🛑 Capturar errores
 process.on("uncaughtException", (err) => {
   console.error("Error detectado:", err);
+});
+db.getConnection((err, connection) => {
+  if (err) {
+    console.error("❌ Error conectando a MySQL:", err);
+  } else {
+    console.log("✅ MySQL conectado");
+    connection.release();
+  }
 });
