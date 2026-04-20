@@ -1,3 +1,5 @@
+console.log("HOST:", process.env.MYSQLHOST);
+console.log("USER:", process.env.MYSQLUSER);
 const express = require("express");
 const mysql = require("mysql2");
 const bcrypt = require("bcryptjs");
