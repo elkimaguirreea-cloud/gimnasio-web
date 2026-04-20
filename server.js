@@ -7,20 +7,23 @@ const app = express();
 app.use(express.json());
 
 // 🧱 Base de datos
-const db = new sqlite3.Database("usuarios.db");
+const mysql = require("mysql2");
 
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS usuarios (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nombre TEXT,
-      apellido TEXT,
-      email TEXT UNIQUE,
-      password TEXT
-    )
-  `);
+const db = mysql.createConnection({
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
 });
 
+db.query(`
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE,
+  password TEXT
+)
+`);
 // 🌐 Servir frontend
 app.use(express.static("public"));
 
@@ -34,18 +37,14 @@ app.post("/registro", async (req, res) => {
 
   const hash = await bcrypt.hash(password, 10);
 
-  db.run(
+  db.query(
     "INSERT INTO usuarios (email, password) VALUES (?, ?)",
     [email, hash],
     (err) => {
       if (err) {
-        if (err.message.includes("UNIQUE")) {
-          return res.send("Este correo ya está registrado");
-        }
-        return res.send("Error al registrar");
+        return res.json({ mensaje: "El correo ya está registrado" });
       }
-
-      res.send("Usuario registrado");
+      res.json({ mensaje: "Usuario registrado" });
     }
   );
 });
@@ -83,8 +82,9 @@ app.post("/login", (req, res) => {
 });
 
 // 🚀 Servidor
-app.listen(3000, () => {
-  console.log("Servidor en http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Servidor corriendo");
 });
 
 // 🛑 Capturar errores
