@@ -10,11 +10,11 @@ app.use(express.json());
 
 // 🧱 Conexión MySQL
 const db = mysql.createPool({
-  host: "metro.proxy.rlwy.net",
-  user: "root",
-  password: "BaioOseNTRHTzyJYbPAyCJHcSFMxMxyk",
-  database: "railway",
-  port: 10179
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
 });
 
 // Crear tabla si no existe
