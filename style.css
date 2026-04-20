@@ -1,0 +1,10 @@
+body,htmlE{
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    width: 100vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: url(fondo.jpg) center center;
+    background-size: cover;
+}

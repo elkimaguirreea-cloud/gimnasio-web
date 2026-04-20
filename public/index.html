@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>DIGISPORTS</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fuente PRO -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Iconos -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-slate-900 text-white font-[Poppins] transition-all duration-300">
+
+<!-- 🟣 LANDING -->
+<section id="landing" class="h-screen flex items-center justify-center">
+  <div class="text-center space-y-4">
+    <h1 class="text-5xl font-bold">DIGISPORTS</h1>
+    <p class="text-gray-400">Entrena desde donde quieras</p>
+
+    <div class="mt-6 space-x-4">
+      <button onclick="mostrarLogin()" class="bg-emerald-500 px-6 py-2 rounded-xl hover:bg-emerald-600 transition">
+        Empezar
+      </button>
+      <button onclick="mostrarLogin()" class="border border-white/20 px-6 py-2 rounded-xl hover:bg-white hover:text-black transition">
+        Iniciar sesión
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- 🔐 LOGIN -->
+<section id="login" class="hidden h-screen flex items-center justify-center">
+
+  <div class="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-lg w-80">
+
+    <h2 id="tituloForm" class="text-2xl font-bold text-center mb-6">Iniciar sesión</h2>
+    <div id="camposRegistro" class="hidden">
+  <input id="nombre" type="text" placeholder="Nombre"
+    class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
+
+  <input id="apellido" type="text" placeholder="Apellido"
+    class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
+</div>
+
+    <input id="email" type="email" placeholder="Correo"
+      class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
+
+    <input id="password" type="password" placeholder="Contraseña"
+      class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
+      
+
+    <button id="btnAccion"
+      onclick="login()"
+      class="w-full bg-emerald-500 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+      Entrar
+    </button>
+
+    <p id="toggleTexto" class="text-sm text-gray-400 mt-4 text-center cursor-pointer"
+       onclick="toggleModo()">
+      ¿No tienes cuenta? Regístrate
+    </p>
+
+  </div>
+
+</section>
+
+<!-- 🏋️ PANEL -->
+<section id="panel" class="hidden min-h-screen p-6">
+
+  <!-- Navbar -->
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-xl font-bold">DIGISPORTS</h1>
+    <div class="space-x-4 text-gray-400">
+      <button class="hover:text-white">Inicio</button>
+      <button class="hover:text-white">Cursos</button>
+      <button class="hover:text-white">Perfil</button>
+    </div>
+  </div>
+
+  <!-- Bienvenida -->
+  <div class="mb-8">
+    <h2 id="saludo" class="text-3xl font-bold">Hola 👋</h2>
+    <p class="text-gray-400">¿Listo para entrenar hoy?</p>
+  </div>
+
+  <!-- Cursos -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- CARD TEMPLATE -->
+    <!-- Reutilizado con estilo PRO -->
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl 
+    hover:scale-105 hover:shadow-xl transition duration-300">
+      <h3 class="text-lg font-semibold">Estiramientos</h3>
+      <p class="text-gray-400 text-sm mt-2">Mejora tu flexibilidad</p>
+      <button onclick="abrirContenido('Estiramientos', ['Cuello', 'Hombros', 'Piernas'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Calentamientos</h3>
+      <p class="text-gray-400 text-sm mt-2">Activa tu cuerpo</p>
+      <button onclick="abrirContenido('Calentamientos', ['Saltos', 'Movilidad', 'Trote'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Entrenamiento funcional</h3>
+      <p class="text-gray-400 text-sm mt-2">Movimientos completos</p>
+      <button onclick="abrirContenido('Funcional', ['Burpees', 'Plancha', 'Saltos'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Musculación</h3>
+      <p class="text-gray-400 text-sm mt-2">Desarrolla fuerza</p>
+      <button onclick="abrirContenido('Musculación', ['Flexiones', 'Sentadillas', 'Abdominales'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Propiocepción</h3>
+      <p class="text-gray-400 text-sm mt-2">Mejora equilibrio</p>
+      <button onclick="abrirContenido('Propiocepción', ['Equilibrio', 'Coordinación'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Capacidades físicas</h3>
+      <p class="text-gray-400 text-sm mt-2">Resistencia y velocidad</p>
+      <button onclick="abrirContenido('Capacidades', ['Sprint', 'Resistencia'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Hábitos saludables</h3>
+      <p class="text-gray-400 text-sm mt-2">Hidratación y descanso</p>
+      <button onclick="abrirContenido('Hábitos', ['Agua', 'Sueño', 'Alimentación'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver consejos
+      </button>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Recuperación</h3>
+      <p class="text-gray-400 text-sm mt-2">Relaja tu cuerpo</p>
+      <button onclick="abrirContenido('Recuperación', ['Respiración', 'Relajación'])"
+      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        Ver ejercicios
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- 📚 CONTENIDO -->
+<section id="contenido" class="hidden min-h-screen p-6">
+
+  <button onclick="volverPanel()" class="mb-6 bg-slate-700 px-4 py-2 rounded-xl hover:bg-slate-600 transition">
+    ⬅ Volver
+  </button>
+
+  <h2 id="tituloContenido" class="text-3xl font-bold mb-6"></h2>
+
+  <div id="listaEjercicios" class="space-y-4"></div>
+
+</section>
+
+<!-- ⚙️ JS -->
+ <script>
+async function login() {
+  const email = document.querySelector('input[type="email"]').value;
+  const password = document.querySelector('input[type="password"]').value;
+
+  const res = await fetch("http://localhost:3000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const texto = await res.text();
+
+  if (texto === "Login correcto") {
+    mostrarPanel();
+  } else {
+    alert(texto);
+  }
+}
+</script>
+<script>
+
+let modo = "login"; // o "registro"
+
+function toggleModo() {
+  if (modo === "login") {
+    modo = "registro";
+
+    document.getElementById("tituloForm").innerText = "Crear cuenta";
+    document.getElementById("btnAccion").innerText = "Registrarse";
+    document.getElementById("btnAccion").setAttribute("onclick", "registro()");
+    document.getElementById("toggleTexto").innerText = "¿Ya tienes cuenta? Inicia sesión";
+
+    document.getElementById("camposRegistro").classList.remove("hidden"); // 👈
+
+  } else {
+    modo = "login";
+
+    document.getElementById("tituloForm").innerText = "Iniciar sesión";
+    document.getElementById("btnAccion").innerText = "Entrar";
+    document.getElementById("btnAccion").setAttribute("onclick", "login()");
+    document.getElementById("toggleTexto").innerText = "¿No tienes cuenta? Regístrate";
+
+    document.getElementById("camposRegistro").classList.add("hidden"); // 👈
+  }
+}
+
+// LOGIN
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://localhost:3000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (data.mensaje === "Login correcto") {
+    mostrarPanel();
+
+    document.getElementById("saludo").innerText =
+      "Hola, " + data.nombre;
+  } else {
+    alert(data.mensaje);
+  }
+}
+
+// REGISTRO
+async function registro() {
+  const nombre = document.getElementById("nombre").value;
+  const apellido = document.getElementById("apellido").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://localhost:3000/registro", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ nombre, apellido, email, password })
+  });
+
+  const texto = await res.text();
+
+  alert(texto);
+
+  toggleModo(); // vuelve a login
+}
+
+</script>
+
+<script>
+function mostrarLogin() {
+  document.getElementById("landing").classList.add("hidden");
+  document.getElementById("login").classList.remove("hidden");
+}
+
+function mostrarPanel() {
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("panel").classList.remove("hidden");
+}
+
+function abrirContenido(titulo, ejercicios) {
+  document.getElementById("panel").classList.add("hidden");
+  document.getElementById("contenido").classList.remove("hidden");
+
+  document.getElementById("tituloContenido").innerText = titulo;
+
+  let lista = document.getElementById("listaEjercicios");
+  lista.innerHTML = "";
+
+  ejercicios.forEach(ej => {
+    let item = document.createElement("div");
+    item.className = "bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl";
+    item.innerText = ej;
+    lista.appendChild(item);
+  });
+}
+function volverPanel() {
+  document.getElementById("contenido").classList.add("hidden");
+  document.getElementById("panel").classList.remove("hidden");
+}
+
+lucide.createIcons();
+</script>
+
+</body>
+</html>
