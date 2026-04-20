@@ -103,3 +103,9 @@ db.getConnection((err, connection) => {
     connection.release();
   }
 });
+app.get("/test-db", (req, res) => {
+  db.query("SELECT 1", (err) => {
+    if (err) return res.send("❌ DB ERROR");
+    res.send("✅ DB OK");
+  });
+});
