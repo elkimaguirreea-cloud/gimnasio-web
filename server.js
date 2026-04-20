@@ -1,14 +1,12 @@
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
-const bcrypt = require("bcrypt");
+const mysql = require("mysql2");
+const bcrypt = require("bcryptjs");
 const path = require("path");
 
 const app = express();
 app.use(express.json());
 
-// 🧱 Base de datos
-const mysql = require("mysql2");
-
+// 🧱 Conexión MySQL
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
@@ -17,6 +15,7 @@ const db = mysql.createConnection({
   port: process.env.MYSQLPORT
 });
 
+// Crear tabla si no existe
 db.query(`
 CREATE TABLE IF NOT EXISTS usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,6 +23,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   password TEXT
 )
 `);
+
 // 🌐 Servir frontend
 app.use(express.static("public"));
 
@@ -53,18 +53,20 @@ app.post("/registro", async (req, res) => {
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
-  db.get(
+  db.query(
     "SELECT * FROM usuarios WHERE email = ?",
     [email],
-    async (err, user) => {
+    async (err, results) => {
 
       if (err) {
         return res.json({ mensaje: "Error en el servidor" });
       }
 
-      if (!user) {
+      if (results.length === 0) {
         return res.json({ mensaje: "Credenciales incorrectas" });
       }
+
+      const user = results[0];
 
       const valido = await bcrypt.compare(password, user.password);
 
@@ -72,10 +74,9 @@ app.post("/login", (req, res) => {
         return res.json({ mensaje: "Credenciales incorrectas" });
       }
 
-      // ✅ Login correcto
       res.json({
         mensaje: "Login correcto",
-        nombre: user.email // puedes cambiar esto luego
+        nombre: user.email
       });
     }
   );
