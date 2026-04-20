@@ -36,18 +36,18 @@ app.get("/", (req, res) => {
 
 // 📝 REGISTRO
 app.post("/registro", async (req, res) => {
-  const { email, password } = req.body;
+ const { email, password, nombre, apellido } = req.body;
 
   const hash = await bcrypt.hash(password, 10);
 
   db.query(
-    "INSERT INTO usuarios (email, password) VALUES (?, ?)",
-    [email, hash],
-    (err) => {
-      if (err) {
-        return res.json({ mensaje: "El correo ya está registrado" });
-      }
-      res.json({ mensaje: "Usuario registrado" });
+  "INSERT INTO usuarios (email, password, nombre, apellido) VALUES (?, ?, ?, ?)",
+  [email, hash, nombre, apellido],
+  (err) => {
+    if (err) {
+      return res.json({ mensaje: "El correo ya está registrado" });
+    }
+    res.json({ mensaje: "Usuario registrado" });
     }
   );
 });
