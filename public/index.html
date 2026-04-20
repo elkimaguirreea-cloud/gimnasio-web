@@ -268,7 +268,7 @@ async function registro() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const res = await fetch("http://localhost:3000/registro", {
+  const res = await fetch("/registro", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
