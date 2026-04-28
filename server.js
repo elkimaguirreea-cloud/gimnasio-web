@@ -130,3 +130,92 @@ app.get("/usuarios", (req, res) => {
     }
   );
 });
+
+// Guardar nuevos usuarios 
+
+app.post("/usuarios", async (req, res) => {
+  const { nombre, apellido, email, password, rol } = req.body;
+
+  if (!nombre || !apellido || !email || !password) {
+    return res.json({ mensaje: "Faltan datos" });
+  }
+
+  const hash = await bcrypt.hash(password, 10);
+
+  db.query(
+    "INSERT INTO usuarios (nombre, apellido, email, password, rol) VALUES (?, ?, ?, ?, ?)",
+    [nombre, apellido, email, hash, rol],
+    (err) => {
+      if (err) {
+        console.error(err);
+        return res.json({ mensaje: "Error al registrar usuario" });
+      }
+      res.json({ mensaje: "Usuario creado correctamente" });
+    }
+  );
+});
+
+// Eliminar Usuarios
+
+app.delete("/usuarios/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.query(
+    "DELETE FROM usuarios WHERE id = ?",
+    [id],
+    (err) => {
+      if (err) {
+        console.error(err);
+        return res.json({ mensaje: "Error al eliminar" });
+      }
+      res.json({ mensaje: "Usuario eliminado" });
+    }
+  );
+});
+
+
+
+// Actualizar Usuario
+
+app.put("/usuarios/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nombre, apellido, email, password, rol } = req.body;
+
+  try {
+    let query;
+    let params;
+
+    // 🧠 Si el usuario escribió nueva contraseña → encriptar
+    if (password && password.trim() !== "") {
+      const hash = await bcrypt.hash(password, 10);
+
+      query = `
+        UPDATE usuarios 
+        SET nombre=?, apellido=?, email=?, password=?, rol=? 
+        WHERE id=?
+      `;
+      params = [nombre, apellido, email, hash, rol, id];
+
+    } else {
+      // 🧠 Si NO cambia contraseña → no tocarla
+      query = `
+        UPDATE usuarios 
+        SET nombre=?, apellido=?, email=?, rol=? 
+        WHERE id=?
+      `;
+      params = [nombre, apellido, email, rol, id];
+    }
+
+    db.query(query, params, (err) => {
+      if (err) {
+        console.error(err);
+        return res.json({ mensaje: "Error al actualizar usuario" });
+      }
+      res.json({ mensaje: "Usuario actualizado correctamente" });
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.json({ mensaje: "Error del servidor" });
+  }
+});
