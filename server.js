@@ -81,7 +81,9 @@ app.post("/login", (req, res) => {
 
       res.json({
         mensaje: "Login correcto",
-        nombre: user.nombre
+        nombre: user.nombre,
+        rol: usuario.rol
+
       });
     }
   );
