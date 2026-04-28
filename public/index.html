@@ -131,6 +131,29 @@
   </div>
 </div>
 
+<div id="modalConfirmar" class="modal-overlay" onclick="cerrarConfirmar(event)">
+  <div class="modal-box bg-slate-800 border border-white/10 rounded-2xl shadow-2xl p-6 w-[90%] max-w-sm">
+    
+    <h2 class="text-lg font-bold mb-3">¿Eliminar usuario?</h2>
+    <p class="text-gray-400 text-sm mb-5">
+      Esta acción no se puede deshacer.
+    </p>
+
+    <div class="flex gap-3">
+      <button onclick="confirmarEliminar()"
+        class="flex-1 bg-red-600 py-2 rounded-xl hover:bg-red-700 transition font-semibold">
+        Sí, eliminar
+      </button>
+
+      <button onclick="cerrarConfirmarBtn()"
+        class="flex-1 bg-slate-600 py-2 rounded-xl hover:bg-slate-500 transition">
+        Cancelar
+      </button>
+    </div>
+
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════
      🔐 LOGIN
 ════════════════════════════════════════ -->
@@ -385,7 +408,7 @@
   let usuarioActual  = null;
   let esAdmin        = false;
   let editandoId = null;
-
+  let idAEliminar = null;
   
 
   // ─── NAVEGACIÓN ──────────────────────────────────────
@@ -518,6 +541,8 @@
   const fila = document.createElement("div");
   fila.className = "user-row flex items-center justify-between px-6 py-4 transition";
 
+  const esAdminPrincipal = u.email === "admin@levelingfit.com";
+
   fila.innerHTML = `
     <div class="flex-1">
       <p class="font-semibold">${u.nombre} ${u.apellido}</p>
@@ -528,18 +553,22 @@
       <button onclick="abrirEditar(${u.id}, '${u.nombre}', '${u.apellido}', '${u.email}', '${u.rol}')"
         class="text-blue-400 text-sm">Editar</button>
 
-      <button onclick="eliminarUsuario(${u.id})"
-        class="text-red-400 text-sm">Eliminar</button>
+      ${
+        esAdminPrincipal
+          ? "" // 🚫 no mostrar botón eliminar
+          : `<button onclick="eliminarUsuario(${u.id})"
+              class="text-red-400 text-sm">Eliminar</button>`
+      }
     </div>
   `;
 
-  contenedor.appendChild(fila);
-});
-
+  contenedor.appendChild(fila);});
   } catch (error) {
     contenedor.innerHTML = "Error cargando usuarios";
   }
 }
+
+
   async function guardarUsuario() {
   const nombre   = document.getElementById("adminNombre").value;
   const apellido = document.getElementById("adminApellido").value;
@@ -567,9 +596,28 @@
     document.getElementById("adminRol").value = "usuario";
   }
 
+
+  // Funcion eliminar usuario
  async function eliminarUsuario(id) {
-  await fetch(`/usuarios/${id}`, { method: "DELETE" });
+  idAEliminar = id;
+  document.getElementById("modalConfirmar").classList.add("active");
+}
+async function confirmarEliminar() {
+  if (!idAEliminar) return;
+
+  await fetch(`/usuarios/${idAEliminar}`, { method: "DELETE" });
+
+  cerrarConfirmarBtn();
   renderTabla();
+}function cerrarConfirmar(e) {
+  if (e.target === document.getElementById("modalConfirmar")) {
+    cerrarConfirmarBtn();
+  }
+}
+
+function cerrarConfirmarBtn() {
+  document.getElementById("modalConfirmar").classList.remove("active");
+  idAEliminar = null;
 }
 
 

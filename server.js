@@ -161,19 +161,40 @@ app.delete("/usuarios/:id", (req, res) => {
   const { id } = req.params;
 
   db.query(
-    "DELETE FROM usuarios WHERE id = ?",
+    "SELECT email FROM usuarios WHERE id = ?",
     [id],
-    (err) => {
+    (err, results) => {
+
       if (err) {
         console.error(err);
-        return res.json({ mensaje: "Error al eliminar" });
+        return res.json({ mensaje: "Error del servidor" });
       }
-      res.json({ mensaje: "Usuario eliminado" });
+
+      if (results.length === 0) {
+        return res.json({ mensaje: "Usuario no encontrado" });
+      }
+
+      const email = results[0].email;
+
+      // 🚫 BLOQUEAR EL ADMIN PRINCIPAL
+      if (email === "admin@levelingfit.com") {
+        return res.json({ mensaje: "No se puede eliminar el administrador principal" });
+      }
+
+      // ✅ eliminar si no es admin principal
+      db.query(
+        "DELETE FROM usuarios WHERE id = ?",
+        [id],
+        (err) => {
+          if (err) {
+            console.error(err);
+            return res.json({ mensaje: "Error al eliminar" });
+          }
+          res.json({ mensaje: "Usuario eliminado" });
+        }
+      );
     }
-  );
-});
-
-
+  );});
 
 // Actualizar Usuario
 
