@@ -473,7 +473,7 @@
 
     if (data.mensaje === "Login correcto") {
       usuarioActual = data;
-      esAdmin = data.rol === "admin";
+      esAdmin = data.rol?.trim().toLowerCase() === "admin";
 
       document.getElementById("saludo").innerText =
         "Hola, " + data.nombre + " 👋";
@@ -591,9 +591,9 @@ function abrirEditar(id, nombre, apellido, email, rol) {
     if (e.target === document.getElementById("modalEditar")) cerrarModalEditarBtn();
   }
   function cerrarModalEditarBtn() {
-    document.getElementById("modalEditar").classList.remove("active");
-    editandoIndex = null;
-  }
+  document.getElementById("modalEditar").classList.remove("active");
+  editandoId = null;
+}
 
   async function confirmarEdicion() {
   if (!editandoId) return;
@@ -620,10 +620,7 @@ function abrirEditar(id, nombre, apellido, email, rol) {
 }
 
   function cancelarEdicion() {
-    editandoIndex = null;
-    limpiarFormAdmin();
-    document.getElementById("formTituloAdmin").innerText = "Agregar usuario";
-    document.getElementById("adminBtnCancelar").classList.add("hidden");
+  editandoIndex = null;
   }
 
   // ─── INIT ─────────────────────────────────────────────
