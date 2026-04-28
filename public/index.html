@@ -384,14 +384,9 @@
   let modo           = "login";
   let usuarioActual  = null;
   let esAdmin        = false;
-  let editandoIndex  = null;
+  let editandoId = null;
 
-  // Base de usuarios (simulada; en producción vendría del backend)
-  let usuarios = [
-    { nombre: "Admin",  apellido: "Sistema", email: ADMIN_EMAIL,    password: ADMIN_PASSWORD, rol: "admin"   },
-    { nombre: "María",  apellido: "López",   email: "maria@test.com",   password: "123456",       rol: "usuario" },
-    { nombre: "Carlos", apellido: "Pérez",   email: "carlos@test.com",  password: "654321",       rol: "usuario" },
-  ];
+  
 
   // ─── NAVEGACIÓN ──────────────────────────────────────
 
@@ -459,57 +454,38 @@
   }
 
   async function login() {
-    const email    = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-    if (!email || !password) { alert("Completa todos los campos."); return; }
+  if (!email || !password) {
+    alert("Completa todos los campos.");
+    return;
+  }
 
-    // ── Verificar contra lista local (reemplazar con fetch al backend real) ──
-    const usuario = usuarios.find(u => u.email === email && u.password === password);
+  try {
+    const res = await fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify({ email, password })
+    });
 
-    if (usuario) {
-      usuarioActual = usuario;
-      esAdmin       = (usuario.rol === "admin");
+    const data = await res.json();
 
-      document.getElementById("saludo").innerText = "Hola, " + usuario.nombre + " 👋";
+    if (data.mensaje === "Login correcto") {
+      usuarioActual = data;
+      esAdmin = data.rol === "admin";
+
+      document.getElementById("saludo").innerText =
+        "Hola, " + data.nombre + " 👋";
+
       mostrarPanel();
     } else {
-      // Intentar backend real (si existe)
-      try {
-        const res  = await fetch("/login", {
-          method: "POST",
-          headers: { "Content-Type":"application/json" },
-          body: JSON.stringify({ email, password })
-        });
-        const data = await res.json();
-        if (data.mensaje === "Login correcto") {
-          usuarioActual = { nombre: data.nombre, email, rol: "usuario" };
-          esAdmin = false;
-          document.getElementById("saludo").innerText = "Hola, " + data.nombre + " 👋";
-          mostrarPanel();
-        } else {
-          alert("Correo o contraseña incorrectos.");
-        }
-      } catch {
-        alert("Correo o contraseña incorrectos.");
-      }
+      alert("Correo o contraseña incorrectos.");
     }
+  } catch {
+    alert("Error de conexión");
   }
-
-  async function registro() {
-    const nombre   = document.getElementById("nombre").value.trim();
-    const apellido = document.getElementById("apellido").value.trim();
-    const email    = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
-
-    if (!nombre || !apellido || !email || !password) { alert("Completa todos los campos."); return; }
-    if (usuarios.find(u => u.email === email)) { alert("Ese correo ya está registrado."); return; }
-
-    usuarios.push({ nombre, apellido, email, password, rol: "usuario" });
-    alert("¡Cuenta creada! Ahora puedes iniciar sesión.");
-    toggleModo();
-  }
-
+}
   // ─── CONTENIDO ────────────────────────────────────────
 
   function abrirContenido(titulo, ejercicios) {
@@ -527,49 +503,62 @@
 
   // ─── ADMIN: CRUD USUARIOS ─────────────────────────────
 
-  function renderTabla() {
-    const contenedor = document.getElementById("tablaUsuarios");
+  async function renderTabla() {
+  const contenedor = document.getElementById("tablaUsuarios");
+  contenedor.innerHTML = "Cargando...";
+
+  try {
+    const res = await fetch("/usuarios");
+    const data = await res.json();
+
     contenedor.innerHTML = "";
-    document.getElementById("conteoUsuarios").innerText = usuarios.length + " usuarios";
+    document.getElementById("conteoUsuarios").innerText = data.length + " usuarios";
 
-    usuarios.forEach((u, i) => {
-      const fila = document.createElement("div");
-      fila.className = "user-row flex items-center justify-between px-6 py-4 transition";
-      fila.innerHTML = `
-        <div class="flex-1">
-          <p class="font-semibold">${u.nombre} ${u.apellido}</p>
-          <p class="text-gray-400 text-xs">${u.email}</p>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="text-xs px-3 py-1 rounded-full ${u.rol === 'admin' ? 'bg-amber-500/20 text-amber-400' : 'bg-[#AD1524]/10 text-[#AD1524]'}">
-            ${u.rol}
-          </span>
-          <button onclick="abrirEditar(${i})" class="text-gray-400 hover:text-white transition text-sm px-3 py-1 rounded-lg hover:bg-white/10">
-            ✏️ Editar
-          </button>
-          <button onclick="eliminarUsuario(${i})" class="text-gray-400 hover:text-red-400 transition text-sm px-3 py-1 rounded-lg hover:bg-red-500/10">
-            🗑️ Eliminar
-          </button>
-        </div>
-      `;
-      contenedor.appendChild(fila);
-    });
+    data.forEach((u) => {
+  const fila = document.createElement("div");
+  fila.className = "user-row flex items-center justify-between px-6 py-4 transition";
+
+  fila.innerHTML = `
+    <div class="flex-1">
+      <p class="font-semibold">${u.nombre} ${u.apellido}</p>
+      <p class="text-gray-400 text-xs">${u.email}</p>
+    </div>
+
+    <div class="flex gap-2">
+      <button onclick="abrirEditar(${u.id}, '${u.nombre}', '${u.apellido}', '${u.email}', '${u.rol}')"
+        class="text-blue-400 text-sm">Editar</button>
+
+      <button onclick="eliminarUsuario(${u.id})"
+        class="text-red-400 text-sm">Eliminar</button>
+    </div>
+  `;
+
+  contenedor.appendChild(fila);
+});
+
+  } catch (error) {
+    contenedor.innerHTML = "Error cargando usuarios";
   }
+}
+  async function guardarUsuario() {
+  const nombre   = document.getElementById("adminNombre").value;
+  const apellido = document.getElementById("adminApellido").value;
+  const email    = document.getElementById("adminEmail").value;
+  const password = document.getElementById("adminPassword").value;
+  const rol      = document.getElementById("adminRol").value;
 
-  function guardarUsuario() {
-    const nombre   = document.getElementById("adminNombre").value.trim();
-    const apellido = document.getElementById("adminApellido").value.trim();
-    const email    = document.getElementById("adminEmail").value.trim();
-    const password = document.getElementById("adminPassword").value;
-    const rol      = document.getElementById("adminRol").value;
+  const res = await fetch("/usuarios", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nombre, apellido, email, password, rol })
+  });
 
-    if (!nombre || !apellido || !email || !password) { alert("Completa todos los campos."); return; }
-    if (usuarios.find(u => u.email === email)) { alert("Ese correo ya existe."); return; }
+  const data = await res.json();
+  alert(data.mensaje);
 
-    usuarios.push({ nombre, apellido, email, password, rol });
-    limpiarFormAdmin();
-    renderTabla();
-  }
+  renderTabla();
+  limpiarFormAdmin();
+}
 
   function limpiarFormAdmin() {
     ["adminNombre","adminApellido","adminEmail","adminPassword"].forEach(id => {
@@ -578,25 +567,25 @@
     document.getElementById("adminRol").value = "usuario";
   }
 
-  function eliminarUsuario(i) {
-    if (usuarios[i].email === ADMIN_EMAIL) { alert("No puedes eliminar al administrador principal."); return; }
-    if (!confirm(`¿Eliminar a ${usuarios[i].nombre} ${usuarios[i].apellido}?`)) return;
-    usuarios.splice(i, 1);
-    renderTabla();
-  }
+ async function eliminarUsuario(id) {
+  await fetch(`/usuarios/${id}`, { method: "DELETE" });
+  renderTabla();
+}
+
 
   // ─── EDITAR USUARIO (modal) ───────────────────────────
 
-  function abrirEditar(i) {
-    editandoIndex = i;
-    const u = usuarios[i];
-    document.getElementById("editNombre").value   = u.nombre;
-    document.getElementById("editApellido").value = u.apellido;
-    document.getElementById("editEmail").value    = u.email;
-    document.getElementById("editPassword").value = "";
-    document.getElementById("editRol").value      = u.rol;
-    document.getElementById("modalEditar").classList.add("active");
-  }
+function abrirEditar(id, nombre, apellido, email, rol) {
+  editandoId = id;
+
+  document.getElementById("editNombre").value = nombre;
+  document.getElementById("editApellido").value = apellido;
+  document.getElementById("editEmail").value = email;
+  document.getElementById("editPassword").value = "";
+  document.getElementById("editRol").value = rol;
+
+  document.getElementById("modalEditar").classList.add("active");
+}
 
   function cerrarModalEditar(e) {
     if (e.target === document.getElementById("modalEditar")) cerrarModalEditarBtn();
@@ -606,30 +595,29 @@
     editandoIndex = null;
   }
 
-  function confirmarEdicion() {
-    if (editandoIndex === null) return;
-    const u        = usuarios[editandoIndex];
-    const nombre   = document.getElementById("editNombre").value.trim();
-    const apellido = document.getElementById("editApellido").value.trim();
-    const email    = document.getElementById("editEmail").value.trim();
-    const password = document.getElementById("editPassword").value;
-    const rol      = document.getElementById("editRol").value;
+  async function confirmarEdicion() {
+  if (!editandoId) return;
 
-    if (!nombre || !apellido || !email) { alert("Nombre, apellido y correo son obligatorios."); return; }
+  const nombre   = document.getElementById("editNombre").value.trim();
+  const apellido = document.getElementById("editApellido").value.trim();
+  const email    = document.getElementById("editEmail").value.trim();
+  const password = document.getElementById("editPassword").value;
+  const rol      = document.getElementById("editRol").value;
 
-    // verificar email duplicado (excepto el propio)
-    const dup = usuarios.find((x, i) => x.email === email && i !== editandoIndex);
-    if (dup) { alert("Ese correo ya está en uso."); return; }
-
-    u.nombre   = nombre;
-    u.apellido = apellido;
-    u.email    = email;
-    if (password) u.password = password;
-    u.rol      = rol;
-
-    cerrarModalEditarBtn();
-    renderTabla();
+  if (!nombre || !apellido || !email) {
+    alert("Nombre, apellido y correo son obligatorios.");
+    return;
   }
+
+  await fetch(`/usuarios/${editandoId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nombre, apellido, email, password, rol })
+  });
+
+  cerrarModalEditarBtn();
+  renderTabla();
+}
 
   function cancelarEdicion() {
     editandoIndex = null;

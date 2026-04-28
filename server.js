@@ -21,8 +21,11 @@ const db = mysql.createPool({
 db.query(`
 CREATE TABLE IF NOT EXISTS usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100),
+  apellido VARCHAR(100),
   email VARCHAR(255) UNIQUE,
-  password TEXT
+  password TEXT,
+  rol VARCHAR(20) DEFAULT 'usuario'
 )
 `);
 
@@ -78,7 +81,7 @@ app.post("/login", (req, res) => {
 
       res.json({
         mensaje: "Login correcto",
-        nombre: user.email
+        nombre: user.nombre
       });
     }
   );
@@ -110,4 +113,18 @@ app.get("/test-db", (req, res) => {
     }
     res.send("✅ DB OK");
   });
+});
+
+// Obtener usuarios
+app.get("/usuarios", (req, res) => {
+  db.query(
+    "SELECT id, nombre, apellido, email, rol FROM usuarios",
+    (err, results) => {
+      if (err) {
+        console.error(err);
+        return res.json({ error: "Error al obtener usuarios" });
+      }
+      res.json(results);
+    }
+  );
 });
