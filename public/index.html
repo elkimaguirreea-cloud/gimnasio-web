@@ -3,82 +3,181 @@
 <head>
   <meta charset="UTF-8">
   <title>DIGISPORTS</title>
-
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fuente PRO -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <!-- Iconos -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      z-index: 50;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1; pointer-events: all;
+    }
+    .modal-box {
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    /* Fade in sections */
+    .fade-in { animation: fadeIn 0.4s ease forwards; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+    /* Glow card */
+    .glow-card:hover {
+      box-shadow: 0 0 24px rgba(173,21,36,0.18);
+    }
+
+    /* Admin badge */
+    .admin-badge {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Table rows */
+    .user-row:hover { background: rgba(255,255,255,0.04); }
+
+    /* Input clean */
+    .inp {
+      width: 100%; padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 0.75rem;
+      color: white; outline: none;
+      transition: border-color 0.2s;
+    }
+    .inp:focus { border-color: #AD1524; }
+    .inp::placeholder { color: #6b7280; }
+  </style>
 </head>
 
-<body class="bg-slate-900 text-white font-[Poppins] transition-all duration-300">
+<body class="bg-slate-900 text-white transition-all duration-300">
 
-<!-- 🟣 LANDING -->
-<section id="landing" class="h-screen flex items-center justify-center">
-  <div class="text-center space-y-4">
-    <h1 class="text-5xl font-bold">DIGISPORTS</h1>
-    <p class="text-gray-400">Entrena desde donde quieras</p>
+<!-- ════════════════════════════════════════
+     🌐 LANDING
+════════════════════════════════════════ -->
+<section id="landing" class="h-screen flex items-center justify-center relative overflow-hidden">
 
-    <div class="mt-6 space-x-4">
-      <button onclick="mostrarLogin()" class="bg-emerald-500 px-6 py-2 rounded-xl hover:bg-emerald-600 transition">
+  <!-- fondo decorativo -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-[-80px] left-[-80px] w-96 h-96 bg-[#AD1524]/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[-80px] right-[-80px] w-96 h-96 bg-[#AD1524]/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="text-center space-y-4 relative z-10 fade-in">
+    <div class="inline-block mb-2">
+      <span class="text-[#AD1524] text-xs font-semibold tracking-widest uppercase">Tu plataforma de entrenamiento</span>
+    </div>
+    <h1 class="text-6xl font-bold tracking-tight">DIGISPORTS</h1>
+    <p class="text-gray-400 text-lg">Entrena desde donde quieras</p>
+
+    <div class="mt-8 flex gap-4 justify-center">
+      <!-- "Empezar" → lleva al login -->
+      <button onclick="mostrarLogin()"
+        class="bg-[#AD1524] px-7 py-2.5 rounded-xl hover:bg-[#8f1020] transition font-semibold shadow-lg shadow-[#AD1524]/20">
         Empezar
       </button>
-      <button onclick="mostrarLogin()" class="border border-white/20 px-6 py-2 rounded-xl hover:bg-white hover:text-black transition">
-        Iniciar sesión
+      <!-- "Info" → abre modal informativo -->
+      <button onclick="abrirInfo()"
+        class="border border-white/20 px-7 py-2.5 rounded-xl hover:bg-white hover:text-black transition font-semibold">
+        Info
       </button>
     </div>
   </div>
 </section>
 
-<!-- 🔐 LOGIN -->
-<section id="login" class="hidden h-screen flex items-center justify-center">
-
-  <div class="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-lg w-80">
-
-    <h2 id="tituloForm" class="text-2xl font-bold text-center mb-6">Iniciar sesión</h2>
-    <div id="camposRegistro" class="hidden">
-  <input id="nombre" type="text" placeholder="Nombre"
-    class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
-
-  <input id="apellido" type="text" placeholder="Apellido"
-    class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
+<!-- ════════════════════════════════════════
+     ℹ️ MODAL INFO
+════════════════════════════════════════ -->
+<div id="modalInfo" class="modal-overlay" onclick="cerrarInfo(event)">
+  <div class="modal-box bg-slate-800 border border-white/10 rounded-2xl shadow-2xl p-8 w-[90%] max-w-md">
+    <div class="flex justify-between items-start mb-6">
+      <h2 class="text-2xl font-bold">¿Qué es DIGISPORTS?</h2>
+      <button onclick="cerrarInfoBtn()" class="text-gray-400 hover:text-white transition text-xl leading-none">✕</button>
+    </div>
+    <div class="space-y-4 text-gray-300 text-sm leading-relaxed">
+      <p>
+        <span class="text-[#AD1524] font-semibold">DIGISPORTS</span> es una plataforma digital de bienestar y entrenamiento físico diseñada para ayudarte a mantenerte activo desde cualquier lugar.
+      </p>
+      <ul class="space-y-2">
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Tutoriales de estiramientos, calentamiento y musculación</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Hábitos saludables: hidratación, sueño y alimentación</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Entrenamiento funcional y propiocepción</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Técnicas de recuperación y relajación</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Acceso personalizado con tu cuenta</li>
+      </ul>
+      <p class="text-gray-400 text-xs pt-2">Crea tu cuenta o inicia sesión para comenzar. ¡Tu cuerpo te lo agradecerá!</p>
+    </div>
+    <button onclick="cerrarInfoBtn(); mostrarLogin();"
+      class="mt-6 w-full bg-[#AD1524] py-2.5 rounded-xl hover:bg-[#8f1020] transition font-semibold">
+      Comenzar ahora
+    </button>
+  </div>
 </div>
 
-    <input id="email" type="email" placeholder="Correo"
-      class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
+<!-- ════════════════════════════════════════
+     🔐 LOGIN
+════════════════════════════════════════ -->
+<section id="login" class="hidden h-screen flex items-center justify-center relative overflow-hidden">
 
-    <input id="password" type="password" placeholder="Contraseña"
-      class="w-full p-3 mb-4 rounded-lg bg-slate-700 focus:outline-none">
-      
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-[-80px] right-[-80px] w-72 h-72 bg-[#AD1524]/10 rounded-full blur-3xl"></div>
+  </div>
 
-    <button id="btnAccion"
-      onclick="login()"
-      class="w-full bg-emerald-500 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+  <div class="fade-in bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl w-80 relative z-10">
+
+    <!-- back -->
+    <button onclick="volverLanding()" class="text-gray-400 hover:text-white text-sm mb-4 flex items-center gap-1 transition">
+      ← Volver
+    </button>
+
+    <h2 class="text-2xl font-bold text-center mb-6">Iniciar sesión</h2>
+
+    <input id="email" type="email" placeholder="Correo" class="inp mb-3">
+    <input id="password" type="password" placeholder="Contraseña" class="inp mb-4">
+
+    <button onclick="login()"
+      class="w-full py-2.5 rounded-xl transition font-semibold" style="background:#AD1524;" onmouseover="this.style.background='#8f1020'" onmouseout="this.style.background='#AD1524'">
       Entrar
     </button>
 
-    <p id="toggleTexto" class="text-sm text-gray-400 mt-4 text-center cursor-pointer"
-       onclick="toggleModo()">
-      ¿No tienes cuenta? Regístrate
+    <p class="text-sm text-gray-400 mt-4 text-center cursor-pointer hover:text-white transition"
+       onclick="abrirInfo()">
+      ¿Qué es DIGISPORTS? Ver info
     </p>
-
   </div>
-
 </section>
 
-<!-- 🏋️ PANEL -->
+<!-- ════════════════════════════════════════
+     🏋️ PANEL PRINCIPAL
+════════════════════════════════════════ -->
 <section id="panel" class="hidden min-h-screen p-6">
 
   <!-- Navbar -->
-  <div class="flex justify-between items-center mb-8">
-    <h1 class="text-xl font-bold">DIGISPORTS</h1>
-    <div class="space-x-4 text-gray-400">
-      <button class="hover:text-white">Inicio</button>
-      <button class="hover:text-white">Cursos</button>
-      <button class="hover:text-white">Perfil</button>
+  <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+    <h1 class="text-xl font-bold tracking-tight">DIGISPORTS</h1>
+    <div class="flex items-center gap-3">
+      <!-- Botón admin (solo visible para admin) -->
+      <button id="btnAdmin" onclick="mostrarAdmin()" class="hidden items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-1.5 rounded-xl hover:bg-amber-500/20 transition text-sm font-semibold">
+        ⚙️ Gestionar usuarios
+      </button>
+      <button onclick="cerrarSesion()" class="text-gray-400 hover:text-white text-sm transition">Cerrar sesión</button>
     </div>
   </div>
 
@@ -88,81 +187,85 @@
     <p class="text-gray-400">¿Listo para entrenar hoy?</p>
   </div>
 
-  <!-- Cursos -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Grid de cursos -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-    <!-- CARD TEMPLATE -->
-    <!-- Reutilizado con estilo PRO -->
-
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl 
-    hover:scale-105 hover:shadow-xl transition duration-300">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🤸</div>
       <h3 class="text-lg font-semibold">Estiramientos</h3>
-      <p class="text-gray-400 text-sm mt-2">Mejora tu flexibilidad</p>
+      <p class="text-gray-400 text-sm mt-1">Mejora tu flexibilidad</p>
       <button onclick="abrirContenido('Estiramientos', ['Cuello', 'Hombros', 'Piernas'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🔥</div>
       <h3 class="text-lg font-semibold">Calentamientos</h3>
-      <p class="text-gray-400 text-sm mt-2">Activa tu cuerpo</p>
+      <p class="text-gray-400 text-sm mt-1">Activa tu cuerpo</p>
       <button onclick="abrirContenido('Calentamientos', ['Saltos', 'Movilidad', 'Trote'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">⚡</div>
       <h3 class="text-lg font-semibold">Entrenamiento funcional</h3>
-      <p class="text-gray-400 text-sm mt-2">Movimientos completos</p>
+      <p class="text-gray-400 text-sm mt-1">Movimientos completos</p>
       <button onclick="abrirContenido('Funcional', ['Burpees', 'Plancha', 'Saltos'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">💪</div>
       <h3 class="text-lg font-semibold">Musculación</h3>
-      <p class="text-gray-400 text-sm mt-2">Desarrolla fuerza</p>
+      <p class="text-gray-400 text-sm mt-1">Desarrolla fuerza</p>
       <button onclick="abrirContenido('Musculación', ['Flexiones', 'Sentadillas', 'Abdominales'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🧘</div>
       <h3 class="text-lg font-semibold">Propiocepción</h3>
-      <p class="text-gray-400 text-sm mt-2">Mejora equilibrio</p>
+      <p class="text-gray-400 text-sm mt-1">Mejora tu equilibrio</p>
       <button onclick="abrirContenido('Propiocepción', ['Equilibrio', 'Coordinación'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🏃</div>
       <h3 class="text-lg font-semibold">Capacidades físicas</h3>
-      <p class="text-gray-400 text-sm mt-2">Resistencia y velocidad</p>
+      <p class="text-gray-400 text-sm mt-1">Resistencia y velocidad</p>
       <button onclick="abrirContenido('Capacidades', ['Sprint', 'Resistencia'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🥦</div>
       <h3 class="text-lg font-semibold">Hábitos saludables</h3>
-      <p class="text-gray-400 text-sm mt-2">Hidratación y descanso</p>
+      <p class="text-gray-400 text-sm mt-1">Hidratación y descanso</p>
       <button onclick="abrirContenido('Hábitos', ['Agua', 'Sueño', 'Alimentación'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver consejos
       </button>
     </div>
 
-    <div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition">
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">😴</div>
       <h3 class="text-lg font-semibold">Recuperación</h3>
-      <p class="text-gray-400 text-sm mt-2">Relaja tu cuerpo</p>
+      <p class="text-gray-400 text-sm mt-1">Relaja tu cuerpo</p>
       <button onclick="abrirContenido('Recuperación', ['Respiración', 'Relajación'])"
-      class="mt-4 bg-emerald-500 px-5 py-2 rounded-xl hover:bg-emerald-600 transition font-semibold">
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
@@ -170,154 +273,373 @@
   </div>
 </section>
 
-<!-- 📚 CONTENIDO -->
+<!-- ════════════════════════════════════════
+     📚 CONTENIDO
+════════════════════════════════════════ -->
 <section id="contenido" class="hidden min-h-screen p-6">
-
-  <button onclick="volverPanel()" class="mb-6 bg-slate-700 px-4 py-2 rounded-xl hover:bg-slate-600 transition">
+  <button onclick="volverPanel()" class="mb-6 bg-slate-700 px-4 py-2 rounded-xl hover:bg-slate-600 transition text-sm">
     ⬅ Volver
   </button>
-
   <h2 id="tituloContenido" class="text-3xl font-bold mb-6"></h2>
-
   <div id="listaEjercicios" class="space-y-4"></div>
-
 </section>
 
-<!-- ⚙️ JS -->
- <script>
-async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+<!-- ════════════════════════════════════════
+     ⚙️ PANEL ADMIN
+════════════════════════════════════════ -->
+<section id="adminPanel" class="hidden min-h-screen p-6">
 
-  const res = await fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
+  <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
+    <div class="flex items-center gap-3">
+      <h1 class="text-xl font-bold">DIGISPORTS</h1>
+      <span class="admin-badge text-white">Admin</span>
+    </div>
+    <button onclick="volverPanel()" class="text-gray-400 hover:text-white text-sm transition">← Volver al panel</button>
+  </div>
 
-  const data = await res.json();
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-1">Gestión de usuarios</h2>
+    <p class="text-gray-400 text-sm mb-6">Registra, edita o elimina usuarios de la plataforma.</p>
 
-  if (data.mensaje === "Login correcto") {
-    mostrarPanel();
+    <!-- Formulario agregar/editar -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
+      <h3 id="formTituloAdmin" class="text-lg font-semibold mb-4">Agregar usuario</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <input id="adminNombre" type="text" placeholder="Nombre" class="inp">
+        <input id="adminApellido" type="text" placeholder="Apellido" class="inp">
+        <input id="adminEmail" type="email" placeholder="Correo" class="inp">
+        <input id="adminPassword" type="password" placeholder="Contraseña" class="inp">
+        <div class="flex items-center gap-3">
+          <label class="text-sm text-gray-400">Rol:</label>
+          <select id="adminRol" class="inp">
+            <option value="usuario">Usuario</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex gap-3 mt-4">
+        <button id="adminBtnGuardar" onclick="guardarUsuario()"
+          class="bg-[#AD1524] px-6 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
+          Guardar
+        </button>
+        <button id="adminBtnCancelar" onclick="cancelarEdicion()" class="hidden bg-slate-600 px-6 py-2 rounded-xl hover:bg-slate-500 transition text-sm">
+          Cancelar
+        </button>
+      </div>
+    </div>
 
-    document.getElementById("saludo").innerText =
-      "Hola, " + data.nombre;
-  } else {
-    alert(data.mensaje);
-  }
-}
-</script>
+    <!-- Tabla usuarios -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-white/10 flex justify-between items-center">
+        <span class="font-semibold">Usuarios registrados</span>
+        <span id="conteoUsuarios" class="text-gray-400 text-sm"></span>
+      </div>
+      <div id="tablaUsuarios" class="divide-y divide-white/5">
+        <!-- filas renderizadas por JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     📝 MODAL EDITAR USUARIO
+════════════════════════════════════════ -->
+<div id="modalEditar" class="modal-overlay" onclick="cerrarModalEditar(event)">
+  <div class="modal-box bg-slate-800 border border-white/10 rounded-2xl shadow-2xl p-8 w-[90%] max-w-md">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-bold">Editar usuario</h2>
+      <button onclick="cerrarModalEditarBtn()" class="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+    </div>
+    <div class="space-y-3">
+      <input id="editNombre" type="text" placeholder="Nombre" class="inp">
+      <input id="editApellido" type="text" placeholder="Apellido" class="inp">
+      <input id="editEmail" type="email" placeholder="Correo" class="inp">
+      <input id="editPassword" type="password" placeholder="Nueva contraseña (opcional)" class="inp">
+      <select id="editRol" class="inp">
+        <option value="usuario">Usuario</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+    <div class="flex gap-3 mt-6">
+      <button onclick="confirmarEdicion()" class="flex-1 bg-[#AD1524] py-2.5 rounded-xl hover:bg-[#8f1020] transition font-semibold">
+        Guardar cambios
+      </button>
+      <button onclick="cerrarModalEditarBtn()" class="flex-1 bg-slate-600 py-2.5 rounded-xl hover:bg-slate-500 transition">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ⚙️ JAVASCRIPT
+════════════════════════════════════════ -->
 <script>
 
-let modo = "login"; // o "registro"
+  // ─── CREDENCIALES ADMIN ───────────────────────────────
+  const ADMIN_EMAIL    = "admin@digisports.com";
+  const ADMIN_PASSWORD = "admin123";
 
-function toggleModo() {
-  if (modo === "login") {
-    modo = "registro";
+  // ─── ESTADO ───────────────────────────────────────────
+  let modo           = "login";
+  let usuarioActual  = null;
+  let esAdmin        = false;
+  let editandoIndex  = null;
 
-    document.getElementById("tituloForm").innerText = "Crear cuenta";
-    document.getElementById("btnAccion").innerText = "Registrarse";
-    document.getElementById("btnAccion").setAttribute("onclick", "registro()");
-    document.getElementById("toggleTexto").innerText = "¿Ya tienes cuenta? Inicia sesión";
+  // Base de usuarios (simulada; en producción vendría del backend)
+  let usuarios = [
+    { nombre: "Admin",  apellido: "Sistema", email: ADMIN_EMAIL,    password: ADMIN_PASSWORD, rol: "admin"   },
+    { nombre: "María",  apellido: "López",   email: "maria@test.com",   password: "123456",       rol: "usuario" },
+    { nombre: "Carlos", apellido: "Pérez",   email: "carlos@test.com",  password: "654321",       rol: "usuario" },
+  ];
 
-    document.getElementById("camposRegistro").classList.remove("hidden"); // 👈
+  // ─── NAVEGACIÓN ──────────────────────────────────────
 
-  } else {
-    modo = "login";
-
-    document.getElementById("tituloForm").innerText = "Iniciar sesión";
-    document.getElementById("btnAccion").innerText = "Entrar";
-    document.getElementById("btnAccion").setAttribute("onclick", "login()");
-    document.getElementById("toggleTexto").innerText = "¿No tienes cuenta? Regístrate";
-
-    document.getElementById("camposRegistro").classList.add("hidden"); // 👈
+  function mostrarSeccion(id) {
+    ["landing","login","panel","contenido","adminPanel"].forEach(s => {
+      document.getElementById(s).classList.add("hidden");
+    });
+    document.getElementById(id).classList.remove("hidden");
   }
-}
 
-// LOGIN
-async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  const res = await fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
-
-  if (data.mensaje === "Login correcto") {
-    mostrarPanel();
-
-    document.getElementById("saludo").innerText =
-      "Hola, " + data.nombre;
-  } else {
-    alert(data.mensaje);
+  function mostrarLogin() {
+    mostrarSeccion("login");
+    resetLogin();
   }
-}
 
-// REGISTRO
-async function registro() {
-  const nombre = document.getElementById("nombre").value;
-  const apellido = document.getElementById("apellido").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  function volverLanding() {
+    mostrarSeccion("landing");
+  }
 
-  const res = await fetch("/registro", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ nombre, apellido, email, password })
-  });
+  function mostrarPanel() {
+    mostrarSeccion("panel");
+    // mostrar/ocultar botón admin
+    const btnAdmin = document.getElementById("btnAdmin");
+    if (esAdmin) {
+      btnAdmin.classList.remove("hidden");
+      btnAdmin.classList.add("flex");
+    } else {
+      btnAdmin.classList.add("hidden");
+    }
+  }
 
-  const texto = await res.text();
+  function mostrarAdmin() {
+    mostrarSeccion("adminPanel");
+    renderTabla();
+  }
 
-  alert(texto);
+  function volverPanel() {
+    mostrarSeccion("panel");
+  }
 
-  toggleModo(); // vuelve a login
-}
+  function cerrarSesion() {
+    usuarioActual = null;
+    esAdmin = false;
+    mostrarSeccion("landing");
+    resetLogin();
+  }
 
-</script>
+  // ─── INFO MODAL ──────────────────────────────────────
 
-<script>
-function mostrarLogin() {
-  document.getElementById("landing").classList.add("hidden");
-  document.getElementById("login").classList.remove("hidden");
-}
+  function abrirInfo() {
+    document.getElementById("modalInfo").classList.add("active");
+  }
+  function cerrarInfo(e) {
+    if (e.target === document.getElementById("modalInfo")) cerrarInfoBtn();
+  }
+  function cerrarInfoBtn() {
+    document.getElementById("modalInfo").classList.remove("active");
+  }
 
-function mostrarPanel() {
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("panel").classList.remove("hidden");
-}
+  // ─── LOGIN / REGISTRO ─────────────────────────────────
 
-function abrirContenido(titulo, ejercicios) {
-  document.getElementById("panel").classList.add("hidden");
-  document.getElementById("contenido").classList.remove("hidden");
+  function resetLogin() {
+    document.getElementById("email").value    = "";
+    document.getElementById("password").value = "";
+  }
 
-  document.getElementById("tituloContenido").innerText = titulo;
+  async function login() {
+    const email    = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-  let lista = document.getElementById("listaEjercicios");
-  lista.innerHTML = "";
+    if (!email || !password) { alert("Completa todos los campos."); return; }
 
-  ejercicios.forEach(ej => {
-    let item = document.createElement("div");
-    item.className = "bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl";
-    item.innerText = ej;
-    lista.appendChild(item);
-  });
-}
-function volverPanel() {
-  document.getElementById("contenido").classList.add("hidden");
-  document.getElementById("panel").classList.remove("hidden");
-}
+    // ── Verificar contra lista local (reemplazar con fetch al backend real) ──
+    const usuario = usuarios.find(u => u.email === email && u.password === password);
 
-lucide.createIcons();
+    if (usuario) {
+      usuarioActual = usuario;
+      esAdmin       = (usuario.rol === "admin");
+
+      document.getElementById("saludo").innerText = "Hola, " + usuario.nombre + " 👋";
+      mostrarPanel();
+    } else {
+      // Intentar backend real (si existe)
+      try {
+        const res  = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type":"application/json" },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (data.mensaje === "Login correcto") {
+          usuarioActual = { nombre: data.nombre, email, rol: "usuario" };
+          esAdmin = false;
+          document.getElementById("saludo").innerText = "Hola, " + data.nombre + " 👋";
+          mostrarPanel();
+        } else {
+          alert("Correo o contraseña incorrectos.");
+        }
+      } catch {
+        alert("Correo o contraseña incorrectos.");
+      }
+    }
+  }
+
+  async function registro() {
+    const nombre   = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
+    const email    = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!nombre || !apellido || !email || !password) { alert("Completa todos los campos."); return; }
+    if (usuarios.find(u => u.email === email)) { alert("Ese correo ya está registrado."); return; }
+
+    usuarios.push({ nombre, apellido, email, password, rol: "usuario" });
+    alert("¡Cuenta creada! Ahora puedes iniciar sesión.");
+    toggleModo();
+  }
+
+  // ─── CONTENIDO ────────────────────────────────────────
+
+  function abrirContenido(titulo, ejercicios) {
+    mostrarSeccion("contenido");
+    document.getElementById("tituloContenido").innerText = titulo;
+    const lista = document.getElementById("listaEjercicios");
+    lista.innerHTML = "";
+    ejercicios.forEach(ej => {
+      const item = document.createElement("div");
+      item.className = "bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-xl hover:border-[#AD1524]/40 transition";
+      item.innerHTML = `<span class="font-semibold">${ej}</span>`;
+      lista.appendChild(item);
+    });
+  }
+
+  // ─── ADMIN: CRUD USUARIOS ─────────────────────────────
+
+  function renderTabla() {
+    const contenedor = document.getElementById("tablaUsuarios");
+    contenedor.innerHTML = "";
+    document.getElementById("conteoUsuarios").innerText = usuarios.length + " usuarios";
+
+    usuarios.forEach((u, i) => {
+      const fila = document.createElement("div");
+      fila.className = "user-row flex items-center justify-between px-6 py-4 transition";
+      fila.innerHTML = `
+        <div class="flex-1">
+          <p class="font-semibold">${u.nombre} ${u.apellido}</p>
+          <p class="text-gray-400 text-xs">${u.email}</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs px-3 py-1 rounded-full ${u.rol === 'admin' ? 'bg-amber-500/20 text-amber-400' : 'bg-[#AD1524]/10 text-[#AD1524]'}">
+            ${u.rol}
+          </span>
+          <button onclick="abrirEditar(${i})" class="text-gray-400 hover:text-white transition text-sm px-3 py-1 rounded-lg hover:bg-white/10">
+            ✏️ Editar
+          </button>
+          <button onclick="eliminarUsuario(${i})" class="text-gray-400 hover:text-red-400 transition text-sm px-3 py-1 rounded-lg hover:bg-red-500/10">
+            🗑️ Eliminar
+          </button>
+        </div>
+      `;
+      contenedor.appendChild(fila);
+    });
+  }
+
+  function guardarUsuario() {
+    const nombre   = document.getElementById("adminNombre").value.trim();
+    const apellido = document.getElementById("adminApellido").value.trim();
+    const email    = document.getElementById("adminEmail").value.trim();
+    const password = document.getElementById("adminPassword").value;
+    const rol      = document.getElementById("adminRol").value;
+
+    if (!nombre || !apellido || !email || !password) { alert("Completa todos los campos."); return; }
+    if (usuarios.find(u => u.email === email)) { alert("Ese correo ya existe."); return; }
+
+    usuarios.push({ nombre, apellido, email, password, rol });
+    limpiarFormAdmin();
+    renderTabla();
+  }
+
+  function limpiarFormAdmin() {
+    ["adminNombre","adminApellido","adminEmail","adminPassword"].forEach(id => {
+      document.getElementById(id).value = "";
+    });
+    document.getElementById("adminRol").value = "usuario";
+  }
+
+  function eliminarUsuario(i) {
+    if (usuarios[i].email === ADMIN_EMAIL) { alert("No puedes eliminar al administrador principal."); return; }
+    if (!confirm(`¿Eliminar a ${usuarios[i].nombre} ${usuarios[i].apellido}?`)) return;
+    usuarios.splice(i, 1);
+    renderTabla();
+  }
+
+  // ─── EDITAR USUARIO (modal) ───────────────────────────
+
+  function abrirEditar(i) {
+    editandoIndex = i;
+    const u = usuarios[i];
+    document.getElementById("editNombre").value   = u.nombre;
+    document.getElementById("editApellido").value = u.apellido;
+    document.getElementById("editEmail").value    = u.email;
+    document.getElementById("editPassword").value = "";
+    document.getElementById("editRol").value      = u.rol;
+    document.getElementById("modalEditar").classList.add("active");
+  }
+
+  function cerrarModalEditar(e) {
+    if (e.target === document.getElementById("modalEditar")) cerrarModalEditarBtn();
+  }
+  function cerrarModalEditarBtn() {
+    document.getElementById("modalEditar").classList.remove("active");
+    editandoIndex = null;
+  }
+
+  function confirmarEdicion() {
+    if (editandoIndex === null) return;
+    const u        = usuarios[editandoIndex];
+    const nombre   = document.getElementById("editNombre").value.trim();
+    const apellido = document.getElementById("editApellido").value.trim();
+    const email    = document.getElementById("editEmail").value.trim();
+    const password = document.getElementById("editPassword").value;
+    const rol      = document.getElementById("editRol").value;
+
+    if (!nombre || !apellido || !email) { alert("Nombre, apellido y correo son obligatorios."); return; }
+
+    // verificar email duplicado (excepto el propio)
+    const dup = usuarios.find((x, i) => x.email === email && i !== editandoIndex);
+    if (dup) { alert("Ese correo ya está en uso."); return; }
+
+    u.nombre   = nombre;
+    u.apellido = apellido;
+    u.email    = email;
+    if (password) u.password = password;
+    u.rol      = rol;
+
+    cerrarModalEditarBtn();
+    renderTabla();
+  }
+
+  function cancelarEdicion() {
+    editandoIndex = null;
+    limpiarFormAdmin();
+    document.getElementById("formTituloAdmin").innerText = "Agregar usuario";
+    document.getElementById("adminBtnCancelar").classList.add("hidden");
+  }
+
+  // ─── INIT ─────────────────────────────────────────────
+  lucide.createIcons();
 </script>
 
 </body>
