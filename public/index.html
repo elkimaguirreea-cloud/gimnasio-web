@@ -229,7 +229,7 @@
 
   <!-- Bienvenida -->
   <div class="mb-8">
-    <h2 id="saludo" class="text-3xl font-bold">Hola 👋</h2>
+    <h2 id="saludo" class="text-3xl font-bold">Hola</h2>
     <p class="text-gray-400">¿Listo para entrenar hoy?</p>
   </div>
 
@@ -696,7 +696,7 @@
         esAdmin = data.rol?.trim().toLowerCase() === "admin";
 
         document.getElementById("saludo").innerText =
-          "Hola, " + data.nombre + " 👋";
+          "Hola, " + data.nombre;
 
         mostrarPanel();
       } else {
