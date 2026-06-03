@@ -64,6 +64,21 @@
     }
     .inp:focus { border-color: #AD1524; }
     .inp::placeholder { color: #6b7280; }
+
+    /* Próximamente badge */
+    .badge-pronto {
+      display: inline-block;
+      background: rgba(173,21,36,0.15);
+      border: 1px solid rgba(173,21,36,0.3);
+      color: #f87171;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 10px;
+      border-radius: 999px;
+      margin-bottom: 0.5rem;
+    }
   </style>
 </head>
 
@@ -91,12 +106,10 @@
     <p class="text-gray-400 text-lg">Entrena desde donde quieras</p>
 
     <div class="mt-8 flex gap-4 justify-center">
-      <!-- "Empezar" → lleva al login -->
       <button onclick="mostrarLogin()"
         class="bg-[#AD1524] px-7 py-2.5 rounded-xl hover:bg-[#8f1020] transition font-semibold shadow-lg shadow-[#AD1524]/20">
         Empezar
       </button>
-      <!-- "Info" → abre modal informativo -->
       <button onclick="abrirInfo()"
         class="border border-white/20 px-7 py-2.5 rounded-xl hover:bg-white hover:text-black transition font-semibold">
         Info
@@ -207,7 +220,6 @@
   <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
     <h1 class="text-xl font-bold tracking-tight">LEVELING-FIT</h1>
     <div class="flex items-center gap-3">
-      <!-- Botón admin (solo visible para admin) -->
       <button id="btnAdmin" onclick="mostrarAdmin()" class="hidden items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-1.5 rounded-xl hover:bg-amber-500/20 transition text-sm font-semibold">
         ⚙️ Gestionar usuarios
       </button>
@@ -221,86 +233,64 @@
     <p class="text-gray-400">¿Listo para entrenar hoy?</p>
   </div>
 
-  <!-- Grid de cursos -->
+  <!-- ── GRID DE CARDS ─────────────────────────────── -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+    <!-- 1. ESTIRAMIENTOS — Próximamente -->
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transition duration-300 opacity-70">
       <div class="text-2xl mb-2">🤸</div>
+      <div class="badge-pronto">Próximamente</div>
       <h3 class="text-lg font-semibold">Estiramientos</h3>
-      <p class="text-gray-400 text-sm mt-1">Mejora tu flexibilidad</p>
-      <button onclick="abrirContenido('Estiramientos', ['Cuello', 'Hombros', 'Piernas'])"
-        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
-        Ver ejercicios
+      <p class="text-gray-500 text-sm mt-1">Contenido en preparación. ¡Vuelve pronto!</p>
+      <button disabled
+        class="mt-4 bg-slate-700 px-5 py-2 rounded-xl text-gray-500 font-semibold text-sm cursor-not-allowed">
+        Disponible pronto
       </button>
     </div>
 
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+    <!-- 2. CALENTAMIENTOS — Próximamente -->
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transition duration-300 opacity-70">
       <div class="text-2xl mb-2">🔥</div>
+      <div class="badge-pronto">Próximamente</div>
       <h3 class="text-lg font-semibold">Calentamientos</h3>
-      <p class="text-gray-400 text-sm mt-1">Activa tu cuerpo</p>
-      <button onclick="abrirContenido('Calentamientos', ['Saltos', 'Movilidad', 'Trote'])"
-        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
-        Ver ejercicios
+      <p class="text-gray-500 text-sm mt-1">Contenido en preparación. ¡Vuelve pronto!</p>
+      <button disabled
+        class="mt-4 bg-slate-700 px-5 py-2 rounded-xl text-gray-500 font-semibold text-sm cursor-not-allowed">
+        Disponible pronto
       </button>
     </div>
 
+    <!-- 3. ENTRENAMIENTO FUNCIONAL — Con info real -->
     <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
       <div class="text-2xl mb-2">⚡</div>
       <h3 class="text-lg font-semibold">Entrenamiento funcional</h3>
-      <p class="text-gray-400 text-sm mt-1">Movimientos completos</p>
-      <button onclick="abrirContenido('Funcional', ['Burpees', 'Plancha', 'Saltos'])"
+      <p class="text-gray-400 text-sm mt-1">Movimientos completos para tu día a día</p>
+      <button onclick="abrirContenido('Entrenamiento Funcional', ejerciciosFuncional)"
         class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
-      <div class="text-2xl mb-2">💪</div>
-      <h3 class="text-lg font-semibold">Musculación</h3>
-      <p class="text-gray-400 text-sm mt-1">Desarrolla fuerza</p>
-      <button onclick="abrirContenido('Musculación', ['Flexiones', 'Sentadillas', 'Abdominales'])"
-        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
-        Ver ejercicios
-      </button>
-    </div>
-
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
-      <div class="text-2xl mb-2">🧘</div>
-      <h3 class="text-lg font-semibold">Propiocepción</h3>
-      <p class="text-gray-400 text-sm mt-1">Mejora tu equilibrio</p>
-      <button onclick="abrirContenido('Propiocepción', ['Equilibrio', 'Coordinación'])"
-        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
-        Ver ejercicios
-      </button>
-    </div>
-
+    <!-- 4. CAPACIDADES FÍSICAS — Con info real -->
     <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
       <div class="text-2xl mb-2">🏃</div>
       <h3 class="text-lg font-semibold">Capacidades físicas</h3>
-      <p class="text-gray-400 text-sm mt-1">Resistencia y velocidad</p>
-      <button onclick="abrirContenido('Capacidades', ['Sprint', 'Resistencia'])"
+      <p class="text-gray-400 text-sm mt-1">Flexibilidad, velocidad y resistencia</p>
+      <button onclick="abrirContenido('Capacidades Físicas', ejerciciosCapacidades)"
         class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+    <!-- 5. HÁBITOS SALUDABLES — Próximamente -->
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transition duration-300 opacity-70">
       <div class="text-2xl mb-2">🥦</div>
+      <div class="badge-pronto">Próximamente</div>
       <h3 class="text-lg font-semibold">Hábitos saludables</h3>
-      <p class="text-gray-400 text-sm mt-1">Hidratación y descanso</p>
-      <button onclick="abrirContenido('Hábitos', ['Agua', 'Sueño', 'Alimentación'])"
-        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
-        Ver consejos
-      </button>
-    </div>
-
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
-      <div class="text-2xl mb-2">😴</div>
-      <h3 class="text-lg font-semibold">Recuperación</h3>
-      <p class="text-gray-400 text-sm mt-1">Relaja tu cuerpo</p>
-      <button onclick="abrirContenido('Recuperación', ['Respiración', 'Relajación'])"
-        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
-        Ver ejercicios
+      <p class="text-gray-500 text-sm mt-1">Contenido en preparación. ¡Vuelve pronto!</p>
+      <button disabled
+        class="mt-4 bg-slate-700 px-5 py-2 rounded-xl text-gray-500 font-semibold text-sm cursor-not-allowed">
+        Disponible pronto
       </button>
     </div>
 
@@ -420,7 +410,204 @@
   let esAdmin        = false;
   let editandoId = null;
   let idAEliminar = null;
-  
+
+  // ─── DATOS DE EJERCICIOS ──────────────────────────────
+
+  const ejerciciosFuncional = [
+    {
+      nombre: "Sentadillas",
+      zona: "Tren inferior",
+      musculos: "Piernas, glúteos y muslos",
+      como: [
+        "Coloca los pies separados al ancho de los hombros.",
+        "Mantén la espalda recta.",
+        "Flexiona las rodillas como si fueras a sentarte.",
+        "Baja lentamente y luego vuelve a subir."
+      ],
+      repeticiones: "3 series de 12 a 15 repeticiones"
+    },
+    {
+      nombre: "Flexiones de brazos",
+      zona: "Tren superior",
+      musculos: "Pecho, hombros y brazos",
+      como: [
+        "Coloca las manos apoyadas en el piso.",
+        "Mantén el cuerpo recto.",
+        "Baja lentamente doblando los codos.",
+        "Empuja hacia arriba hasta regresar a la posición inicial."
+      ],
+      repeticiones: "3 series de 10 a 12 repeticiones"
+    },
+    {
+      nombre: "Zancadas o desplantes",
+      zona: "Tren inferior",
+      musculos: "Glúteos, muslos y pantorrillas",
+      como: [
+        "Da un paso largo hacia adelante.",
+        "Flexiona ambas rodillas.",
+        "La rodilla trasera debe acercarse al suelo.",
+        "Regresa y cambia de pierna."
+      ],
+      repeticiones: "3 series de 10 repeticiones por pierna"
+    },
+    {
+      nombre: "Fondos en silla",
+      zona: "Tren superior",
+      musculos: "Tríceps, hombros y pecho",
+      como: [
+        "Apoya las manos en una silla firme.",
+        "Estira las piernas hacia adelante.",
+        "Baja lentamente doblando los codos.",
+        "Sube nuevamente empujando con los brazos."
+      ],
+      repeticiones: "3 series de 10 a 12 repeticiones"
+    },
+    {
+      nombre: "Battle Rope (Cuerdas funcionales)",
+      zona: "Tren superior",
+      musculos: "Hombros, brazos, pecho, abdomen y espalda",
+      como: [
+        "Sujeta las cuerdas con ambas manos.",
+        "Flexiona ligeramente las rodillas.",
+        "Realiza movimientos rápidos alternando los brazos.",
+        "Mantén el abdomen contraído y la espalda recta."
+      ],
+      repeticiones: "3 series de 30 segundos"
+    },
+    {
+      nombre: "Saltos al cajón (Box Jump)",
+      zona: "Tren inferior",
+      musculos: "Piernas, glúteos y pantorrillas",
+      como: [
+        "Colócate frente a un cajón pliométrico.",
+        "Flexiona las rodillas.",
+        "Salta con ambos pies sobre el cajón.",
+        "Baja lentamente y repite."
+      ],
+      repeticiones: "3 series de 10 saltos"
+    },
+    {
+      nombre: "Burpees",
+      zona: "Tren superior / Tren inferior",
+      musculos: "Piernas, brazos, pecho, abdomen y espalda",
+      como: [
+        "Comienza de pie.",
+        "Baja a posición de plancha.",
+        "Realiza una flexión de brazos.",
+        "Levántate y salta hacia arriba explosivamente."
+      ],
+      repeticiones: "3 series de 10 repeticiones"
+    },
+    {
+      nombre: "Kettlebell Swing",
+      zona: "Tren superior / Tren inferior",
+      musculos: "Glúteos, piernas, abdomen, hombros y espalda",
+      como: [
+        "Sujeta la pesa rusa con ambas manos.",
+        "Flexiona ligeramente las rodillas.",
+        "Impulsa la pesa hacia adelante con la cadera.",
+        "Regresa controladamente."
+      ],
+      repeticiones: "3 series de 15 repeticiones"
+    }
+  ];
+
+  const ejerciciosCapacidades = [
+    {
+      nombre: "Estiramiento de piernas sentado",
+      zona: "Flexibilidad",
+      musculos: "Piernas y espalda baja",
+      como: [
+        "Siéntate con las piernas extendidas.",
+        "Inclina el cuerpo hacia adelante.",
+        "Intenta tocar las puntas de los pies.",
+        "Mantén la posición durante 20 segundos."
+      ],
+      repeticiones: "Mantén 20 segundos, repite 3 veces"
+    },
+    {
+      nombre: "Estiramiento de mariposa",
+      zona: "Flexibilidad",
+      musculos: "Cadera y muslos internos",
+      como: [
+        "Siéntate y junta las plantas de los pies.",
+        "Sujeta los pies con las manos.",
+        "Baja suavemente las rodillas hacia el suelo.",
+        "Mantén durante 20 segundos."
+      ],
+      repeticiones: "Mantén 20 segundos, repite 3 veces"
+    },
+    {
+      nombre: "Estiramiento de brazos y hombros",
+      zona: "Flexibilidad",
+      musculos: "Hombros y brazos",
+      como: [
+        "Lleva un brazo cruzado frente al pecho.",
+        "Ayúdate con el otro brazo para presionar suavemente.",
+        "Mantén la posición 15 a 20 segundos.",
+        "Cambia de brazo."
+      ],
+      repeticiones: "15–20 segundos por lado, repite 3 veces"
+    },
+    {
+      nombre: "Estiramiento de zancada",
+      zona: "Flexibilidad",
+      musculos: "Cadera, piernas y glúteos",
+      como: [
+        "Da un paso largo hacia adelante.",
+        "Flexiona la pierna delantera.",
+        "Mantén la pierna trasera extendida.",
+        "Sostén la posición 20 segundos y cambia de lado."
+      ],
+      repeticiones: "20 segundos por lado, repite 3 veces"
+    },
+    {
+      nombre: "Sprint corto",
+      zona: "Velocidad",
+      musculos: "Piernas, glúteos y abdomen",
+      como: [
+        "Colócate en posición de salida.",
+        "Corre lo más rápido posible durante 20 a 30 metros.",
+        "Descansa y repite."
+      ],
+      repeticiones: "3 series de 5 carreras"
+    },
+    {
+      nombre: "Saltos laterales",
+      zona: "Velocidad",
+      musculos: "Piernas, glúteos y abdomen",
+      como: [
+        "Colócate con pies juntos.",
+        "Salta rápidamente de un lado a otro.",
+        "Mantén el equilibrio y rapidez."
+      ],
+      repeticiones: "3 series de 20 segundos"
+    },
+    {
+      nombre: "Rodillas arriba",
+      zona: "Velocidad",
+      musculos: "Piernas y abdomen",
+      como: [
+        "Corre en el mismo lugar.",
+        "Levanta las rodillas rápidamente hasta la cintura.",
+        "Mantén un ritmo rápido y constante."
+      ],
+      repeticiones: "3 series de 30 segundos"
+    },
+    {
+      nombre: "Saltar la cuerda",
+      zona: "Velocidad",
+      musculos: "Piernas, pantorrillas, brazos, hombros y abdomen",
+      como: [
+        "Sujeta la cuerda con ambas manos.",
+        "Mantén los pies juntos y la espalda recta.",
+        "Gira la cuerda con las muñecas.",
+        "Salta ligeramente cada vez que la cuerda pase por debajo.",
+        "Mantén un ritmo rápido y constante."
+      ],
+      repeticiones: "3 series de 30 segundos"
+    }
+  ];
 
   // ─── NAVEGACIÓN ──────────────────────────────────────
 
@@ -442,7 +629,6 @@
 
   function mostrarPanel() {
     mostrarSeccion("panel");
-    // mostrar/ocultar botón admin
     const btnAdmin = document.getElementById("btnAdmin");
     if (esAdmin) {
       btnAdmin.classList.remove("hidden");
@@ -488,38 +674,39 @@
   }
 
   async function login() {
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
 
-  if (!email || !password) {
-    alert("Completa todos los campos.");
-    return;
-  }
-
-  try {
-    const res = await fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      body: JSON.stringify({ email, password })
-    });
-
-    const data = await res.json();
-
-    if (data.mensaje === "Login correcto") {
-      usuarioActual = data;
-      esAdmin = data.rol?.trim().toLowerCase() === "admin";
-
-      document.getElementById("saludo").innerText =
-        "Hola, " + data.nombre + " 👋";
-
-      mostrarPanel();
-    } else {
-      alert("Correo o contraseña incorrectos.");
+    if (!email || !password) {
+      alert("Completa todos los campos.");
+      return;
     }
-  } catch {
-    alert("Error de conexión");
+
+    try {
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (data.mensaje === "Login correcto") {
+        usuarioActual = data;
+        esAdmin = data.rol?.trim().toLowerCase() === "admin";
+
+        document.getElementById("saludo").innerText =
+          "Hola, " + data.nombre + " 👋";
+
+        mostrarPanel();
+      } else {
+        alert("Correo o contraseña incorrectos.");
+      }
+    } catch {
+      alert("Error de conexión");
+    }
   }
-}
+
   // ─── CONTENIDO ────────────────────────────────────────
 
   function abrirContenido(titulo, ejercicios) {
@@ -527,10 +714,20 @@
     document.getElementById("tituloContenido").innerText = titulo;
     const lista = document.getElementById("listaEjercicios");
     lista.innerHTML = "";
+
     ejercicios.forEach(ej => {
+      const pasos = ej.como.map(p => `<li class="text-gray-300 text-sm">• ${p}</li>`).join("");
       const item = document.createElement("div");
       item.className = "bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-xl hover:border-[#AD1524]/40 transition";
-      item.innerHTML = `<span class="font-semibold">${ej}</span>`;
+      item.innerHTML = `
+        <div class="flex items-start justify-between gap-3 mb-2">
+          <h3 class="font-semibold text-base">${ej.nombre}</h3>
+          <span class="text-xs bg-[#AD1524]/20 text-[#f87171] border border-[#AD1524]/30 px-2 py-0.5 rounded-full whitespace-nowrap">${ej.zona}</span>
+        </div>
+        <p class="text-gray-400 text-xs mb-3">💪 <span class="font-medium">Músculos:</span> ${ej.musculos}</p>
+        <ul class="space-y-1 mb-3">${pasos}</ul>
+        <p class="text-[#AD1524] text-xs font-semibold">🔁 ${ej.repeticiones}</p>
+      `;
       lista.appendChild(item);
     });
   }
@@ -538,67 +735,65 @@
   // ─── ADMIN: CRUD USUARIOS ─────────────────────────────
 
   async function renderTabla() {
-  const contenedor = document.getElementById("tablaUsuarios");
-  contenedor.innerHTML = "Cargando...";
+    const contenedor = document.getElementById("tablaUsuarios");
+    contenedor.innerHTML = "Cargando...";
 
-  try {
-    const res = await fetch("/usuarios");
-    const data = await res.json();
+    try {
+      const res = await fetch("/usuarios");
+      const data = await res.json();
 
-    contenedor.innerHTML = "";
-    document.getElementById("conteoUsuarios").innerText = data.length + " usuarios";
+      contenedor.innerHTML = "";
+      document.getElementById("conteoUsuarios").innerText = data.length + " usuarios";
 
-    data.forEach((u) => {
-  const fila = document.createElement("div");
-  fila.className = "user-row flex items-center justify-between px-6 py-4 transition";
+      data.forEach((u) => {
+        const fila = document.createElement("div");
+        fila.className = "user-row flex items-center justify-between px-6 py-4 transition";
 
-  const esAdminPrincipal = u.email === "admin@levelingfit.com";
+        const esAdminPrincipal = u.email === "admin@levelingfit.com";
 
-  fila.innerHTML = `
-    <div class="flex-1">
-      <p class="font-semibold">${u.nombre} ${u.apellido}</p>
-      <p class="text-gray-400 text-xs">${u.email}</p>
-    </div>
+        fila.innerHTML = `
+          <div class="flex-1">
+            <p class="font-semibold">${u.nombre} ${u.apellido}</p>
+            <p class="text-gray-400 text-xs">${u.email}</p>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="abrirEditar(${u.id}, '${u.nombre}', '${u.apellido}', '${u.email}', '${u.rol}')"
+              class="text-blue-400 text-sm">Editar</button>
+            ${
+              esAdminPrincipal
+                ? ""
+                : `<button onclick="eliminarUsuario(${u.id})"
+                    class="text-red-400 text-sm">Eliminar</button>`
+            }
+          </div>
+        `;
 
-    <div class="flex gap-2">
-      <button onclick="abrirEditar(${u.id}, '${u.nombre}', '${u.apellido}', '${u.email}', '${u.rol}')"
-        class="text-blue-400 text-sm">Editar</button>
-
-      ${
-        esAdminPrincipal
-          ? "" // 🚫 no mostrar botón eliminar
-          : `<button onclick="eliminarUsuario(${u.id})"
-              class="text-red-400 text-sm">Eliminar</button>`
-      }
-    </div>
-  `;
-
-  contenedor.appendChild(fila);});
-  } catch (error) {
-    contenedor.innerHTML = "Error cargando usuarios";
+        contenedor.appendChild(fila);
+      });
+    } catch (error) {
+      contenedor.innerHTML = "Error cargando usuarios";
+    }
   }
-}
-
 
   async function guardarUsuario() {
-  const nombre   = document.getElementById("adminNombre").value;
-  const apellido = document.getElementById("adminApellido").value;
-  const email    = document.getElementById("adminEmail").value;
-  const password = document.getElementById("adminPassword").value;
-  const rol      = document.getElementById("adminRol").value;
+    const nombre   = document.getElementById("adminNombre").value;
+    const apellido = document.getElementById("adminApellido").value;
+    const email    = document.getElementById("adminEmail").value;
+    const password = document.getElementById("adminPassword").value;
+    const rol      = document.getElementById("adminRol").value;
 
-  const res = await fetch("/usuarios", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nombre, apellido, email, password, rol })
-  });
+    const res = await fetch("/usuarios", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, apellido, email, password, rol })
+    });
 
-  const data = await res.json();
-  alert(data.mensaje);
+    const data = await res.json();
+    alert(data.mensaje);
 
-  renderTabla();
-  limpiarFormAdmin();
-}
+    renderTabla();
+    limpiarFormAdmin();
+  }
 
   function limpiarFormAdmin() {
     ["adminNombre","adminApellido","adminEmail","adminPassword"].forEach(id => {
@@ -607,79 +802,76 @@
     document.getElementById("adminRol").value = "usuario";
   }
 
-
-  // Funcion eliminar usuario
- async function eliminarUsuario(id) {
-  idAEliminar = id;
-  document.getElementById("modalConfirmar").classList.add("active");
-}
-async function confirmarEliminar() {
-  if (!idAEliminar) return;
-
-  await fetch(`/usuarios/${idAEliminar}`, { method: "DELETE" });
-
-  cerrarConfirmarBtn();
-  renderTabla();
-}function cerrarConfirmar(e) {
-  if (e.target === document.getElementById("modalConfirmar")) {
-    cerrarConfirmarBtn();
+  async function eliminarUsuario(id) {
+    idAEliminar = id;
+    document.getElementById("modalConfirmar").classList.add("active");
   }
-}
 
-function cerrarConfirmarBtn() {
-  document.getElementById("modalConfirmar").classList.remove("active");
-  idAEliminar = null;
-}
+  async function confirmarEliminar() {
+    if (!idAEliminar) return;
+    await fetch(`/usuarios/${idAEliminar}`, { method: "DELETE" });
+    cerrarConfirmarBtn();
+    renderTabla();
+  }
 
+  function cerrarConfirmar(e) {
+    if (e.target === document.getElementById("modalConfirmar")) {
+      cerrarConfirmarBtn();
+    }
+  }
+
+  function cerrarConfirmarBtn() {
+    document.getElementById("modalConfirmar").classList.remove("active");
+    idAEliminar = null;
+  }
 
   // ─── EDITAR USUARIO (modal) ───────────────────────────
 
-function abrirEditar(id, nombre, apellido, email, rol) {
-  editandoId = id;
-
-  document.getElementById("editNombre").value = nombre;
-  document.getElementById("editApellido").value = apellido;
-  document.getElementById("editEmail").value = email;
-  document.getElementById("editPassword").value = "";
-  document.getElementById("editRol").value = rol;
-
-  document.getElementById("modalEditar").classList.add("active");
-}
+  function abrirEditar(id, nombre, apellido, email, rol) {
+    editandoId = id;
+    document.getElementById("editNombre").value = nombre;
+    document.getElementById("editApellido").value = apellido;
+    document.getElementById("editEmail").value = email;
+    document.getElementById("editPassword").value = "";
+    document.getElementById("editRol").value = rol;
+    document.getElementById("modalEditar").classList.add("active");
+  }
 
   function cerrarModalEditar(e) {
     if (e.target === document.getElementById("modalEditar")) cerrarModalEditarBtn();
   }
+
   function cerrarModalEditarBtn() {
-  document.getElementById("modalEditar").classList.remove("active");
-  editandoId = null;
-}
-
-  async function confirmarEdicion() {
-  if (!editandoId) return;
-
-  const nombre   = document.getElementById("editNombre").value.trim();
-  const apellido = document.getElementById("editApellido").value.trim();
-  const email    = document.getElementById("editEmail").value.trim();
-  const password = document.getElementById("editPassword").value;
-  const rol      = document.getElementById("editRol").value;
-
-  if (!nombre || !apellido || !email) {
-    alert("Nombre, apellido y correo son obligatorios.");
-    return;
+    document.getElementById("modalEditar").classList.remove("active");
+    editandoId = null;
   }
 
-  await fetch(`/usuarios/${editandoId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nombre, apellido, email, password, rol })
-  });
+  async function confirmarEdicion() {
+    if (!editandoId) return;
 
-  cerrarModalEditarBtn();
-  renderTabla();
-}
+    const nombre   = document.getElementById("editNombre").value.trim();
+    const apellido = document.getElementById("editApellido").value.trim();
+    const email    = document.getElementById("editEmail").value.trim();
+    const password = document.getElementById("editPassword").value;
+    const rol      = document.getElementById("editRol").value;
+
+    if (!nombre || !apellido || !email) {
+      alert("Nombre, apellido y correo son obligatorios.");
+      return;
+    }
+
+    await fetch(`/usuarios/${editandoId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nombre, apellido, email, password, rol })
+    });
+
+    cerrarModalEditarBtn();
+    renderTabla();
+  }
 
   function cancelarEdicion() {
-  editandoIndex = null;
+    editandoIndex = null;
   }
 
   // ─── INIT ─────────────────────────────────────────────
