@@ -709,11 +709,65 @@
 
   // ─── CONTENIDO ────────────────────────────────────────
 
+  const introFuncional = {
+    titulo: "Ejercicios en casa",
+    descripcion: "Realización de actividades físicas dentro del hogar o en espacios cercanos, utilizando el propio peso corporal o materiales sencillos, con el objetivo de mejorar la salud, la condición física y el bienestar general.",
+    beneficios: [
+      "Mejora la salud cardiovascular.",
+      "Ayuda a fortalecer músculos y huesos.",
+      "Reduce el estrés y la ansiedad.",
+      "Mejora la postura y la coordinación.",
+      "Favorece el control del peso corporal.",
+      "Incrementa la energía y la concentración.",
+      "Mejora la calidad del sueño."
+    ],
+    ventajas: [
+      "No requiere pagar gimnasio.",
+      "Se puede realizar en cualquier horario.",
+      "Ahorra tiempo de traslado.",
+      "Permite entrenar con comodidad y privacidad.",
+      "Puede adaptarse al nivel físico de cada persona.",
+      "Se necesitan pocos materiales o ninguno."
+    ]
+  };
+
   function abrirContenido(titulo, ejercicios) {
     mostrarSeccion("contenido");
     document.getElementById("tituloContenido").innerText = titulo;
     const lista = document.getElementById("listaEjercicios");
     lista.innerHTML = "";
+
+    // Sub-encabezado solo para Entrenamiento Funcional
+    if (titulo === "Entrenamiento Funcional") {
+      const intro = document.createElement("div");
+      intro.className = "bg-white/5 border border-white/10 rounded-2xl p-6 mb-2";
+      const bens = introFuncional.beneficios.map(b => `<li class="flex items-start gap-2 text-gray-300 text-sm"><span class="text-[#AD1524] mt-0.5 shrink-0">➢</span>${b}</li>`).join("");
+      const vents = introFuncional.ventajas.map(v => `<li class="flex items-start gap-2 text-gray-300 text-sm"><span class="text-[#AD1524] mt-0.5 shrink-0">➢</span>${v}</li>`).join("");
+      intro.innerHTML = `
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-lg">🏠</span>
+          <h3 class="text-base font-bold text-white">${introFuncional.titulo}</h3>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">${introFuncional.descripcion}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="text-xs font-semibold text-[#f87171] uppercase tracking-widest mb-2">Beneficios</p>
+            <ul class="space-y-1">${bens}</ul>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-[#f87171] uppercase tracking-widest mb-2">Ventajas</p>
+            <ul class="space-y-1">${vents}</ul>
+          </div>
+        </div>
+      `;
+      lista.appendChild(intro);
+
+      // Separador antes de los ejercicios
+      const sep = document.createElement("p");
+      sep.className = "text-xs font-semibold text-gray-500 uppercase tracking-widest mt-2 mb-1 px-1";
+      sep.innerText = "Ejercicios";
+      lista.appendChild(sep);
+    }
 
     ejercicios.forEach(ej => {
       const pasos = ej.como.map(p => `<li class="text-gray-300 text-sm">• ${p}</li>`).join("");
