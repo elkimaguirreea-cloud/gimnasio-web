@@ -132,21 +132,21 @@
         <span class="text-[#AD1524] font-semibold">LEVELING-FIT</span> es una plataforma digital de bienestar y entrenamiento físico diseñada para ayudarte a mantenerte activo desde cualquier lugar.
       </p>
       <ul class="space-y-2">
-        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Tutoriales de estiramientos, calentamiento y musculación</li>
-        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Hábitos saludables: hidratación, sueño y alimentación</li>
-        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Entrenamiento funcional y propiocepción</li>
-        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Técnicas de recuperación y relajación</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Ejercicios de gym con técnica paso a paso</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Entrenamiento en casa sin equipamiento</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Guía de nutrición según tu objetivo</li>
+        <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Calentamiento y estiramientos completos</li>
         <li class="flex items-start gap-2"><span class="text-[#AD1524] mt-0.5">✔</span> Acceso personalizado con tu cuenta</li>
       </ul>
       <p class="text-gray-400 text-xs pt-2">
-  Para obtener acceso, solicita tus credenciales directamente al administrador.
-</p>
+        Para obtener acceso, solicita tus credenciales directamente al administrador.
+      </p>
 
-<a href="https://api.whatsapp.com/send?phone=593939860807&text=Hola,%20quiero%20acceso%20a%20Leveling-Fit"
-   target="_blank"
-   class="mt-4 w-full block text-center bg-green-500 py-2.5 rounded-xl hover:bg-green-600 transition font-semibold">
-   📲 Solicitar acceso por WhatsApp
-</a>
+      <a href="https://api.whatsapp.com/send?phone=593939860807&text=Hola,%20quiero%20acceso%20a%20Leveling-Fit"
+         target="_blank"
+         class="mt-4 w-full block text-center bg-green-500 py-2.5 rounded-xl hover:bg-green-600 transition font-semibold">
+         📲 Solicitar acceso por WhatsApp
+      </a>
     </div>
     <button onclick="cerrarInfoBtn(); mostrarLogin();"
       class="mt-6 w-full bg-[#AD1524] py-2.5 rounded-xl hover:bg-[#8f1020] transition font-semibold">
@@ -234,63 +234,49 @@
   </div>
 
   <!-- ── GRID DE CARDS ─────────────────────────────── -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-    <!-- 1. ESTIRAMIENTOS — Próximamente -->
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transition duration-300 opacity-70">
-      <div class="text-2xl mb-2">🤸</div>
-      <div class="badge-pronto">Próximamente</div>
-      <h3 class="text-lg font-semibold">Estiramientos</h3>
-      <p class="text-gray-500 text-sm mt-1">Contenido en preparación. ¡Vuelve pronto!</p>
-      <button disabled
-        class="mt-4 bg-slate-700 px-5 py-2 rounded-xl text-gray-500 font-semibold text-sm cursor-not-allowed">
-        Disponible pronto
-      </button>
-    </div>
-
-    <!-- 2. CALENTAMIENTOS — Próximamente -->
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transition duration-300 opacity-70">
-      <div class="text-2xl mb-2">🔥</div>
-      <div class="badge-pronto">Próximamente</div>
-      <h3 class="text-lg font-semibold">Calentamientos</h3>
-      <p class="text-gray-500 text-sm mt-1">Contenido en preparación. ¡Vuelve pronto!</p>
-      <button disabled
-        class="mt-4 bg-slate-700 px-5 py-2 rounded-xl text-gray-500 font-semibold text-sm cursor-not-allowed">
-        Disponible pronto
-      </button>
-    </div>
-
-    <!-- 3. ENTRENAMIENTO FUNCIONAL — Con info real -->
+    <!-- 1. EJERCICIOS GYM -->
     <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
-      <div class="text-2xl mb-2">⚡</div>
-      <h3 class="text-lg font-semibold">Entrenamiento funcional</h3>
-      <p class="text-gray-400 text-sm mt-1">Movimientos completos para tu día a día</p>
-      <button onclick="abrirContenido('Entrenamiento Funcional', ejerciciosFuncional)"
+      <div class="text-2xl mb-2">🏋️</div>
+      <h3 class="text-lg font-semibold">Ejercicios GYM</h3>
+      <p class="text-gray-400 text-sm mt-1">+80 ejercicios con técnica paso a paso y errores a evitar</p>
+      <button onclick="abrirContenido('Ejercicios GYM', ejerciciosGym)"
         class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <!-- 4. CAPACIDADES FÍSICAS — Con info real -->
+    <!-- 2. ENTRENAMIENTO EN CASA -->
     <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
-      <div class="text-2xl mb-2">🏃</div>
-      <h3 class="text-lg font-semibold">Capacidades físicas</h3>
-      <p class="text-gray-400 text-sm mt-1">Flexibilidad, velocidad y resistencia</p>
-      <button onclick="abrirContenido('Capacidades Físicas', ejerciciosCapacidades)"
+      <div class="text-2xl mb-2">🏠</div>
+      <h3 class="text-lg font-semibold">Entrenamiento en casa</h3>
+      <p class="text-gray-400 text-sm mt-1">Ejercicios funcionales sin equipamiento para tren superior e inferior</p>
+      <button onclick="abrirContenido('Entrenamiento en Casa', ejerciciosCasa)"
         class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
         Ver ejercicios
       </button>
     </div>
 
-    <!-- 5. HÁBITOS SALUDABLES — Próximamente -->
-    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl transition duration-300 opacity-70">
-      <div class="text-2xl mb-2">🥦</div>
-      <div class="badge-pronto">Próximamente</div>
-      <h3 class="text-lg font-semibold">Hábitos saludables</h3>
-      <p class="text-gray-500 text-sm mt-1">Contenido en preparación. ¡Vuelve pronto!</p>
-      <button disabled
-        class="mt-4 bg-slate-700 px-5 py-2 rounded-xl text-gray-500 font-semibold text-sm cursor-not-allowed">
-        Disponible pronto
+    <!-- 3. GUÍA NUTRICIÓN GYM -->
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🥗</div>
+      <h3 class="text-lg font-semibold">Guía Nutrición GYM</h3>
+      <p class="text-gray-400 text-sm mt-1">Qué comer según tu objetivo: ganar masa, perder grasa o recomposición</p>
+      <button onclick="abrirContenido('Guía Nutrición GYM', guiaNutricion)"
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
+        Ver guía
+      </button>
+    </div>
+
+    <!-- 4. CALENTAMIENTO Y ESTIRAMIENTOS -->
+    <div class="glow-card bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl hover:scale-105 hover:shadow-xl transition duration-300">
+      <div class="text-2xl mb-2">🧘</div>
+      <h3 class="text-lg font-semibold">Calentamiento y Estiramientos</h3>
+      <p class="text-gray-400 text-sm mt-1">Rutinas pre y post entrenamiento para cada grupo muscular</p>
+      <button onclick="abrirContenido('Calentamiento y Estiramientos', guiaCalentamiento)"
+        class="mt-4 bg-[#AD1524] px-5 py-2 rounded-xl hover:bg-[#8f1020] transition font-semibold text-sm">
+        Ver rutinas
       </button>
     </div>
 
@@ -411,9 +397,447 @@
   let editandoId = null;
   let idAEliminar = null;
 
-  // ─── DATOS DE EJERCICIOS ──────────────────────────────
+  // ─── DATOS: EJERCICIOS GYM ────────────────────────────
 
-  const ejerciciosFuncional = [
+  const ejerciciosGym = [
+    // ── PECHO ──
+    {
+      nombre: "Chest Press en Máquina",
+      zona: "Pecho",
+      musculos: "Pecho · Hombro Delantero · Tríceps",
+      como: [
+        "Sentate con la espalda bien pegada al respaldo.",
+        "Regulá el asiento: las manijas tienen que quedar a la altura de tu pecho.",
+        "Respirá hondo y empujá hacia adelante hasta estirar los brazos (sin trabar los codos del todo).",
+        "Volvé despacio — no dejes que el peso caiga solo."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Es el mejor ejercicio para tu primer día de gym. La máquina te guía y no necesitás equilibrar nada."
+    },
+    {
+      nombre: "Pec Deck / Mariposa",
+      zona: "Pecho",
+      musculos: "Pecho (aislado) · Hombro Delantero (poco)",
+      como: [
+        "Sentate con la espalda contra el respaldo.",
+        "Regulá la máquina para que los brazos queden abiertos cómodos.",
+        "Cerrá los brazos al centro como si abrazaras a alguien.",
+        "Apretá 1 segundo cuando las almohadillas se tocan y abrí despacio."
+      ],
+      repeticiones: "3 series de 12–15 repeticiones",
+      tip: "Si no 'sentís' el pecho en otros ejercicios, hacé 2 series de mariposa ANTES del press como activación."
+    },
+    {
+      nombre: "Press Inclinado en Máquina",
+      zona: "Pecho Superior",
+      musculos: "Pecho Superior · Hombro Delantero · Tríceps",
+      como: [
+        "Sentate con la espalda en el respaldo inclinado.",
+        "Regulá el asiento: las manijas a la altura de la clavícula.",
+        "Empujá hacia arriba-adelante siguiendo la guía.",
+        "Bajá controlado hasta sentir estiramiento arriba del pecho."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "El pecho superior es lo que más se nota con remera. Siempre incluí al menos 1 ejercicio inclinado."
+    },
+    {
+      nombre: "Cruces en Polea Alta",
+      zona: "Pecho",
+      musculos: "Pecho Medio e Inferior · Hombro Delantero (poco)",
+      como: [
+        "Poné las poleas en la posición más alta.",
+        "Agarrá una manija con cada mano y dá un paso adelante.",
+        "Con los codos levemente doblados, llevá las manos hacia abajo y al centro en arco.",
+        "Apretá el pecho abajo cuando las manos se juntan y volvé arriba despacio."
+      ],
+      repeticiones: "3 series de 12–15 repeticiones",
+      tip: "Ideal para el final de la rutina de pecho. Enfocáte en apretar fuerte cuando las manos se juntan."
+    },
+    {
+      nombre: "Press Plano con Mancuernas",
+      zona: "Pecho",
+      musculos: "Pecho Completo · Hombro Delantero · Tríceps",
+      como: [
+        "Sentate en el borde del banco y dejate caer hacia atrás llevando las mancuernas.",
+        "Pies firmes en el suelo, espalda con su curva natural.",
+        "Bajá las mancuernas a los lados del pecho con los codos a 45°.",
+        "Empujá arriba juntando levemente las mancuernas."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Las mancuernas permiten más rango de movimiento que la barra — sentís más el pecho."
+    },
+    {
+      nombre: "Press Plano con Barra",
+      zona: "Pecho",
+      musculos: "Pecho Completo · Hombro Delantero · Tríceps",
+      como: [
+        "Acostáte en el banco plano dentro de un rack con seguros.",
+        "Agarrá la barra más ancho que tus hombros.",
+        "Bajá la barra al pecho medio con los codos a 45°.",
+        "Tocá el pecho suavemente (sin rebotar) y empujá arriba."
+      ],
+      repeticiones: "3 series de 8–10 repeticiones",
+      tip: "No te obsesiones con el peso. La técnica perfecta vale más que el peso máximo. SIEMPRE usá rack con seguros."
+    },
+    {
+      nombre: "Flexiones (Push-ups)",
+      zona: "Pecho",
+      musculos: "Pecho · Tríceps · Hombro Delantero · Abdominales",
+      como: [
+        "Manos en el suelo un poco más anchas que los hombros.",
+        "Cuerpo recto de cabeza a talones — como una tabla.",
+        "Apretá el abdomen y los glúteos.",
+        "Bajá el pecho al suelo doblando los codos a 45° y empujá hacia arriba."
+      ],
+      repeticiones: "3 series de 10–15 repeticiones",
+      tip: "Las flexiones son el ejercicio más infravalorado. No necesitás gym para hacerlas."
+    },
+    // ── ESPALDA ──
+    {
+      nombre: "Jalón al Pecho — Agarre Ancho",
+      zona: "Espalda",
+      musculos: "Dorsales · Bíceps · Trapecio · Romboides",
+      como: [
+        "Sentate y ajustá las almohadillas para que los muslos queden firmes.",
+        "Agarrá la barra bien ancho e inclinate levemente hacia atrás.",
+        "Tirá la barra hacia la clavícula pensando en llevar los CODOS hacia abajo y atrás.",
+        "Subí la barra despacio hasta estirar los brazos del todo."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Si sentís más los bíceps que la espalda, estás tirando con las manos. Pensá en los codos, no en las manos."
+    },
+    {
+      nombre: "Remo en Máquina (con apoyo de pecho)",
+      zona: "Espalda",
+      musculos: "Dorsales · Romboides · Trapecio · Bíceps · Hombro Trasero",
+      como: [
+        "Sentate con el pecho apoyado contra la almohadilla.",
+        "Tirá las manijas hacia vos apretando los omóplatos.",
+        "Mantené 1 segundo apretando bien atrás.",
+        "Volvé despacio estirando los brazos del todo."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Probablemente el MEJOR remo para principiantes. No te podés lastimar la espalda baja porque está protegida."
+    },
+    {
+      nombre: "Remo en Polea Baja (Cable Row)",
+      zona: "Espalda",
+      musculos: "Dorsales · Romboides · Trapecio · Bíceps · Hombro Trasero",
+      como: [
+        "Sentate con los pies en la plataforma y las rodillas levemente dobladas.",
+        "Mantené el torso recto — NO balancees adelante y atrás.",
+        "Tirá hacia el pecho apretando los omóplatos.",
+        "Volvé despacio dejando que los brazos se estiren y los omóplatos se separen."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "El cable mantiene tensión constante durante todo el movimiento — aprovechá la bajada."
+    },
+    {
+      nombre: "Peso Muerto Convencional",
+      zona: "Espalda / Piernas",
+      musculos: "Espalda Baja · Glúteos · Isquios · Dorsales · Trapecio · Core",
+      como: [
+        "Pies al ancho de caderas, barra sobre el empeine.",
+        "Agarrá la barra al ancho de hombros con pecho arriba y espalda RECTA.",
+        "Empujá el suelo con los pies como si quisieras alejarlo de vos.",
+        "Subí la barra pegada a las piernas y terminá parado derecho con glúteos apretados."
+      ],
+      repeticiones: "3–4 series de 5–8 repeticiones",
+      tip: "Empezá con la barra vacía. Aprendé la técnica durante al menos 2–3 semanas antes de subir peso."
+    },
+    {
+      nombre: "Dominadas (Pull-ups)",
+      zona: "Espalda",
+      musculos: "Dorsales · Bíceps · Romboides · Trapecio · Abdominales",
+      como: [
+        "Agarrá la barra más ancho que tus hombros, palmas mirando adelante.",
+        "Colgáte con los brazos estirados del todo (dead hang).",
+        "Bajá los omóplatos primero (como guardándolos en los bolsillos).",
+        "Tirá el cuerpo hacia arriba hasta que la barbilla pase la barra y bajá controlado."
+      ],
+      repeticiones: "3 series al máximo de repeticiones",
+      tip: "Tu meta como principiante: 1 dominada perfecta. Puede tardar meses y vale cada segundo."
+    },
+    {
+      nombre: "Face Pull en Polea",
+      zona: "Espalda / Hombro",
+      musculos: "Hombro Trasero · Trapecio · Romboides · Rotadores del Hombro",
+      como: [
+        "Poné la polea a la altura de la cara con una cuerda.",
+        "Agarrá la cuerda con los pulgares mirando al techo.",
+        "Tirá hacia la cara separando las manos al final.",
+        "Terminá con los codos altos y apretá 1–2 segundos atrás."
+      ],
+      repeticiones: "3 series de 15–20 repeticiones",
+      tip: "Hacé face pulls TODOS LOS DÍAS que vayas al gym. Es la mejor prevención contra lesiones de hombro."
+    },
+    // ── HOMBROS ──
+    {
+      nombre: "Press de Hombros en Máquina",
+      zona: "Hombros",
+      musculos: "Hombro Delantero y Lateral · Tríceps · Trapecio Superior",
+      como: [
+        "Sentate con la espalda pegada al respaldo.",
+        "Regulá el asiento: las manijas a la altura de tus orejas.",
+        "Empujá hacia arriba hasta casi estirar los brazos.",
+        "Bajá controlado hasta que las manos vuelvan a la altura de las orejas."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Excelente para empezar tu rutina de hombros. La máquina guía el movimiento."
+    },
+    {
+      nombre: "Elevación Lateral con Mancuernas",
+      zona: "Hombros",
+      musculos: "Hombro Lateral · Trapecio (si subís de más)",
+      como: [
+        "Parate derecho con mancuernas livianas a los costados.",
+        "Levantá los brazos hacia los COSTADOS como un pájaro abriendo las alas.",
+        "Subí hasta la altura de los hombros (no más).",
+        "Bajá despacio controlando la bajada."
+      ],
+      repeticiones: "3–4 series de 12–15 repeticiones",
+      tip: "Este ES el ejercicio para hombros anchos. Hacelo 2–3 veces por semana con peso liviano y técnica perfecta."
+    },
+    {
+      nombre: "Elevación Lateral en Polea",
+      zona: "Hombros",
+      musculos: "Hombro Lateral · Trapecio (mínimo)",
+      como: [
+        "Parate al lado de una polea baja.",
+        "Agarrá la manija con la mano del lado OPUESTO.",
+        "Levantá el brazo al costado hasta la altura del hombro.",
+        "Bajá despacio — la polea mantiene tensión constante."
+      ],
+      repeticiones: "3 series de 12–15 repeticiones",
+      tip: "La tensión constante de la polea lo hace superior a la mancuerna. El mejor ejercicio de hombros."
+    },
+    // ── BÍCEPS ──
+    {
+      nombre: "Curl con Barra EZ",
+      zona: "Bíceps",
+      musculos: "Bíceps Completo · Antebrazo",
+      como: [
+        "Parate derecho con la barra EZ al ancho de hombros.",
+        "Los codos pegados al cuerpo — NO se mueven.",
+        "Subí la barra apretando los bíceps.",
+        "Bajá DESPACIO (la bajada es la mitad del ejercicio)."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "La barra EZ es más cómoda para las muñecas que la barra recta. Si te duelen las muñecas, usá la EZ."
+    },
+    {
+      nombre: "Curl con Mancuernas Alternado",
+      zona: "Bíceps",
+      musculos: "Bíceps Completo · Antebrazo",
+      como: [
+        "Parate derecho con una mancuerna en cada mano.",
+        "Subí una mancuerna doblando el codo, apretando el bíceps.",
+        "Bajá despacio mientras subís la otra.",
+        "Alterná brazo por brazo sin mover los codos del cuerpo."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones por brazo",
+      tip: "Podés agregar una SUPINACIÓN: girá la palma hacia arriba mientras subís para activar más el bíceps."
+    },
+    {
+      nombre: "Curl Martillo",
+      zona: "Bíceps",
+      musculos: "Braquial · Bíceps · Antebrazo",
+      como: [
+        "Parate con las palmas mirando hacia tu cuerpo (como agarrando un martillo).",
+        "Subí las mancuernas sin girar las palmas.",
+        "Las palmas siguen mirando hacia adentro todo el tiempo.",
+        "Bajá despacio."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "El braquial que trabaja acá empuja al bíceps para arriba y hace que se vea más grande y completo."
+    },
+    {
+      nombre: "Curl Inclinado con Mancuernas",
+      zona: "Bíceps",
+      musculos: "Bíceps (cabeza larga — el pico) · Antebrazo",
+      como: [
+        "Incliná un banco a 45 grados y sentáte con la espalda contra el respaldo.",
+        "Los brazos quedan DETRÁS del cuerpo por el ángulo del banco.",
+        "Subí las mancuernas sin mover los codos.",
+        "Bajá despacio hasta extensión completa."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "El MEJOR ejercicio para la cabeza larga del bíceps (el pico). No te lo saltees si querés ese bíceps alto."
+    },
+    // ── TRÍCEPS ──
+    {
+      nombre: "Pushdown en Polea (Cuerda)",
+      zona: "Tríceps",
+      musculos: "Tríceps Completo · Antebrazo",
+      como: [
+        "Enganchá la cuerda (rope) en una polea alta.",
+        "Codos pegados al cuerpo.",
+        "Empujá la cuerda hacia abajo estirando los codos.",
+        "Al final SEPARÁ las manos hacia los costados para activar más el tríceps."
+      ],
+      repeticiones: "3 series de 12–15 repeticiones",
+      tip: "El ejercicio de tríceps más popular del gym. Podés hacerlo como calentamiento o como finisher."
+    },
+    {
+      nombre: "Extensión Overhead con Mancuerna",
+      zona: "Tríceps",
+      musculos: "Tríceps (cabeza larga) · Core",
+      como: [
+        "Agarrá UNA mancuerna con las dos manos por encima de la cabeza.",
+        "Bajá la mancuerna detrás de la cabeza doblando los codos.",
+        "Bajá hasta sentir estiramiento profundo en el tríceps.",
+        "Subí estirando los brazos sin mover los codos."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Si solo hacés pushdowns, solo trabajás la cabeza lateral. La cabeza larga (la más grande) necesita este ejercicio."
+    },
+    {
+      nombre: "Press Banca Agarre Cerrado",
+      zona: "Tríceps",
+      musculos: "Tríceps (tres cabezas) · Pecho · Hombro Delantero",
+      como: [
+        "Acostáte en banco plano (igual que press de pecho).",
+        "Agarrá la barra al ancho de hombros o un poco más cerrado.",
+        "Bajá la barra al pecho con los codos PEGADOS al cuerpo.",
+        "Empujá arriba estirando los brazos."
+      ],
+      repeticiones: "3 series de 8–10 repeticiones",
+      tip: "Es un ejercicio compuesto pesado para tríceps. Ponelo primero cuando estás fresco."
+    },
+    // ── CUÁDRICEPS ──
+    {
+      nombre: "Sentadilla con Barra (Squat)",
+      zona: "Cuádriceps / Glúteos",
+      musculos: "Cuádriceps · Glúteos · Isquiotibiales · Espalda Baja · Core",
+      como: [
+        "Apoyá la barra en los trapecios y pies al ancho de hombros.",
+        "Respirá hondo y apretá el abdomen fuerte.",
+        "Bajá como si te fueras a sentar en una silla hasta muslo paralelo al suelo (mínimo).",
+        "Empujá el suelo con los pies y subí."
+      ],
+      repeticiones: "4 series de 6–10 repeticiones",
+      tip: "La sentadilla es el rey de TODOS los ejercicios. Solo si la técnica es perfecta. Filmáte para corregirte."
+    },
+    {
+      nombre: "Prensa de Piernas (Leg Press)",
+      zona: "Cuádriceps / Glúteos",
+      musculos: "Cuádriceps · Glúteos · Isquiotibiales",
+      como: [
+        "Sentáte con la espalda bien apoyada y pies en la plataforma al ancho de hombros.",
+        "Destrabá los seguros y bajá la plataforma doblando las rodillas hasta 90°.",
+        "Empujá con los talones subiendo la plataforma.",
+        "No estirés las rodillas del todo arriba (no trabar)."
+      ],
+      repeticiones: "3–4 series de 10–12 repeticiones",
+      tip: "La prensa es tu mejor amiga si no podés hacer sentadilla. Más segura y fácil de aprender."
+    },
+    {
+      nombre: "Extensión de Rodilla (Leg Extension)",
+      zona: "Cuádriceps",
+      musculos: "Cuádriceps (aislado puro)",
+      como: [
+        "Sentate con la espalda contra el respaldo y almohadilla sobre los tobillos.",
+        "Estirá las piernas subiendo la almohadilla.",
+        "Apretá arriba 1–2 segundos (contracción máxima).",
+        "Bajá controlado — no dejes caer el peso."
+      ],
+      repeticiones: "3 series de 12–15 repeticiones",
+      tip: "Ideal para calentar los cuádriceps ANTES de hacer sentadilla o prensa. 2 series de 15 reps livianas."
+    },
+    // ── ISQUIOS / GLÚTEOS ──
+    {
+      nombre: "Curl Femoral Acostado",
+      zona: "Isquiotibiales",
+      musculos: "Isquiotibiales (aislado) · Gemelos (poco)",
+      como: [
+        "Acostáte boca abajo en la máquina con la almohadilla sobre los talones.",
+        "Doblá las rodillas llevando los talones hacia la cola.",
+        "Apretá arriba 1 segundo.",
+        "Bajá DESPACIO — la bajada es donde más crece el isquio."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Si te dan calambres en los isquios, significa que están débiles. Empezá liviano."
+    },
+    {
+      nombre: "Hip Thrust con Barra",
+      zona: "Glúteos",
+      musculos: "Glúteo Mayor · Isquiotibiales · Core",
+      como: [
+        "Sentate con la espalda alta apoyada contra un banco y la barra (con pad) sobre las caderas.",
+        "Pies al ancho de caderas con rodillas a 90°.",
+        "Empujá la cadera hacia el techo apretando los glúteos.",
+        "Apretá los glúteos FUERTE arriba 1–2 segundos y bajá controlado."
+      ],
+      repeticiones: "3–4 series de 10–12 repeticiones",
+      tip: "El hip thrust es al glúteo lo que el curl es al bíceps: el ejercicio más directo y efectivo."
+    },
+    {
+      nombre: "Peso Muerto Rumano",
+      zona: "Isquiotibiales / Glúteos",
+      musculos: "Isquiotibiales · Glúteos · Espalda Baja · Core",
+      como: [
+        "Parate derecho con la barra en las manos y rodillas levemente dobladas.",
+        "Empujá las caderas para ATRÁS bajando la barra pegada a las piernas.",
+        "Bajá hasta donde sentís que el isquio te tira fuerte.",
+        "Subí apretando los glúteos."
+      ],
+      repeticiones: "3 series de 10–12 repeticiones",
+      tip: "Este ejercicio es tu mejor prevención contra desgarros de isquiotibiales."
+    },
+    // ── GEMELOS ──
+    {
+      nombre: "Elevación de Gemelos Parado en Máquina",
+      zona: "Gemelos",
+      musculos: "Gastrocnemio (el diamante) · Sóleo (poco)",
+      como: [
+        "Puntas de los pies en el borde de la plataforma, talones colgando.",
+        "BAJÁ los talones todo lo que puedas — estiramiento completo.",
+        "Subí en puntas de pie lo más alto posible.",
+        "Apretá arriba 1–2 segundos y bajá DESPACIO (3 segundos)."
+      ],
+      repeticiones: "3–4 series de 12–20 repeticiones",
+      tip: "Regla de oro: 3 seg subiendo, 1 seg apretando arriba, 3 seg bajando. Rango COMPLETO siempre."
+    },
+    {
+      nombre: "Elevación de Gemelos Sentado",
+      zona: "Gemelos",
+      musculos: "Sóleo (el ancho) · Gastrocnemio (poco)",
+      como: [
+        "Sentate en la máquina con las rodillas bajo la almohadilla.",
+        "Puntas de los pies en el borde, talones colgando.",
+        "Bajá los talones todo lo que puedas.",
+        "Subí en puntas apretando fuerte arriba y bajá despacio."
+      ],
+      repeticiones: "3 series de 12–20 repeticiones",
+      tip: "La fórmula: 1 ejercicio parado + 1 ejercicio sentado = gemelos completos. Los dos son necesarios."
+    }
+  ];
+
+  // ─── DATOS: ENTRENAMIENTO EN CASA ────────────────────
+
+  const introEnCasa = {
+    titulo: "Ejercicios en casa",
+    descripcion: "Realización de actividades físicas dentro del hogar o en espacios cercanos, utilizando el propio peso corporal o materiales sencillos, con el objetivo de mejorar la salud, la condición física y el bienestar general.",
+    beneficios: [
+      "Mejora la salud cardiovascular.",
+      "Ayuda a fortalecer músculos y huesos.",
+      "Reduce el estrés y la ansiedad.",
+      "Mejora la postura y la coordinación.",
+      "Favorece el control del peso corporal.",
+      "Incrementa la energía y la concentración.",
+      "Mejora la calidad del sueño."
+    ],
+    ventajas: [
+      "No requiere pagar gimnasio.",
+      "Se puede realizar en cualquier horario.",
+      "Ahorra tiempo de traslado.",
+      "Permite entrenar con comodidad y privacidad.",
+      "Puede adaptarse al nivel físico de cada persona.",
+      "Se necesitan pocos materiales o ninguno."
+    ]
+  };
+
+  const ejerciciosCasa = [
     {
       nombre: "Sentadillas",
       zona: "Tren inferior",
@@ -461,151 +885,272 @@
         "Sube nuevamente empujando con los brazos."
       ],
       repeticiones: "3 series de 10 a 12 repeticiones"
-    },
-    {
-      nombre: "Battle Rope (Cuerdas funcionales)",
-      zona: "Tren superior",
-      musculos: "Hombros, brazos, pecho, abdomen y espalda",
-      como: [
-        "Sujeta las cuerdas con ambas manos.",
-        "Flexiona ligeramente las rodillas.",
-        "Realiza movimientos rápidos alternando los brazos.",
-        "Mantén el abdomen contraído y la espalda recta."
-      ],
-      repeticiones: "3 series de 30 segundos"
-    },
-    {
-      nombre: "Saltos al cajón (Box Jump)",
-      zona: "Tren inferior",
-      musculos: "Piernas, glúteos y pantorrillas",
-      como: [
-        "Colócate frente a un cajón pliométrico.",
-        "Flexiona las rodillas.",
-        "Salta con ambos pies sobre el cajón.",
-        "Baja lentamente y repite."
-      ],
-      repeticiones: "3 series de 10 saltos"
-    },
-    {
-      nombre: "Burpees",
-      zona: "Tren superior / Tren inferior",
-      musculos: "Piernas, brazos, pecho, abdomen y espalda",
-      como: [
-        "Comienza de pie.",
-        "Baja a posición de plancha.",
-        "Realiza una flexión de brazos.",
-        "Levántate y salta hacia arriba explosivamente."
-      ],
-      repeticiones: "3 series de 10 repeticiones"
-    },
-    {
-      nombre: "Kettlebell Swing",
-      zona: "Tren superior / Tren inferior",
-      musculos: "Glúteos, piernas, abdomen, hombros y espalda",
-      como: [
-        "Sujeta la pesa rusa con ambas manos.",
-        "Flexiona ligeramente las rodillas.",
-        "Impulsa la pesa hacia adelante con la cadera.",
-        "Regresa controladamente."
-      ],
-      repeticiones: "3 series de 15 repeticiones"
     }
   ];
 
-  const ejerciciosCapacidades = [
+  // ─── DATOS: GUÍA NUTRICIÓN ────────────────────────────
+
+  const guiaNutricion = [
     {
-      nombre: "Estiramiento de piernas sentado",
-      zona: "Flexibilidad",
-      musculos: "Piernas y espalda baja",
+      nombre: "¿Qué son las calorías?",
+      zona: "Conceptos base",
+      musculos: "Fundamento de cualquier plan nutricional",
       como: [
-        "Siéntate con las piernas extendidas.",
-        "Inclina el cuerpo hacia adelante.",
-        "Intenta tocar las puntas de los pies.",
-        "Mantén la posición durante 20 segundos."
+        "Una caloría es una unidad de energía. Todo lo que comés tiene calorías.",
+        "SUPERÁVIT calórico (comés más de lo que gastás) → engordás.",
+        "DÉFICIT calórico (comés menos de lo que gastás) → adelgazás.",
+        "MANTENIMIENTO (comés igual a lo que gastás) → te mantenés."
       ],
-      repeticiones: "Mantén 20 segundos, repite 3 veces"
+      repeticiones: "Fórmula TMB (Hombres): (10×peso kg) + (6.25×altura cm) − (5×edad) + 5 | Multiplicá por tu nivel de actividad (1.2 sedentario → 1.9 atleta)"
     },
     {
-      nombre: "Estiramiento de mariposa",
-      zona: "Flexibilidad",
-      musculos: "Cadera y muslos internos",
+      nombre: "Los Macronutrientes",
+      zona: "Conceptos base",
+      musculos: "Proteínas · Carbohidratos · Grasas",
       como: [
-        "Siéntate y junta las plantas de los pies.",
-        "Sujeta los pies con las manos.",
-        "Baja suavemente las rodillas hacia el suelo.",
-        "Mantén durante 20 segundos."
+        "PROTEÍNAS (4 kcal/g): construyen y reparan músculo. Fuentes: pollo, huevo, carne, pescado, lácteos.",
+        "CARBOHIDRATOS (4 kcal/g): energía rápida y glucógeno muscular. Fuentes: arroz, papa, avena, frutas.",
+        "GRASAS (9 kcal/g): hormonas y vitaminas liposolubles. Fuentes: aceite de oliva, palta, frutos secos.",
+        "Proteína recomendada si entrenás: 1.6–2.4 g por kg de peso corporal al día."
       ],
-      repeticiones: "Mantén 20 segundos, repite 3 veces"
+      repeticiones: "Distribuí la proteína en 4–5 comidas de 25–35 g cada una"
     },
     {
-      nombre: "Estiramiento de brazos y hombros",
-      zona: "Flexibilidad",
-      musculos: "Hombros y brazos",
+      nombre: "Si sos FLACO (Ectomorfo) — Ganar masa",
+      zona: "Por objetivo",
+      musculos: "Superávit calórico: TDEE + 300–500 kcal",
       como: [
-        "Lleva un brazo cruzado frente al pecho.",
-        "Ayúdate con el otro brazo para presionar suavemente.",
-        "Mantén la posición 15 a 20 segundos.",
-        "Cambia de brazo."
+        "Calculá tu TDEE y sumá 300–500 calorías por encima de tu gasto.",
+        "Macros: 25–30% proteínas · 50–55% carbohidratos · 20–25% grasas.",
+        "Los carbohidratos son TUS mejores amigos: arroz, avena, pasta, banana, papa.",
+        "Comé cada 3–4 horas. Batidos hipercalóricos cuando no podés comer sólido."
       ],
-      repeticiones: "15–20 segundos por lado, repite 3 veces"
+      repeticiones: "Alimentos clave: arroz, avena, pasta, banana, huevos enteros, leche entera, frutos secos, palta"
     },
     {
-      nombre: "Estiramiento de zancada",
-      zona: "Flexibilidad",
-      musculos: "Cadera, piernas y glúteos",
+      nombre: "Si tenés SOBREPESO (Endomorfo) — Perder grasa",
+      zona: "Por objetivo",
+      musculos: "Déficit calórico: TDEE − 300–500 kcal",
       como: [
-        "Da un paso largo hacia adelante.",
-        "Flexiona la pierna delantera.",
-        "Mantén la pierna trasera extendida.",
-        "Sostén la posición 20 segundos y cambia de lado."
+        "Calculá tu TDEE y restá 300–500 calorías. NO vayas a menos de 1,600 kcal (hombres) o 1,400 kcal (mujeres).",
+        "Macros: 30–35% proteínas · 35–40% carbohidratos · 25–30% grasas.",
+        "Proteína alta preserva el músculo durante el déficit y sacia más.",
+        "Carbohidratos en el timing correcto: mayormente pre y post entrenamiento."
       ],
-      repeticiones: "20 segundos por lado, repite 3 veces"
+      repeticiones: "Alimentos clave: pechuga de pollo/pavo, claras de huevo, atún en agua, vegetales verdes, yogur griego, arroz integral"
     },
     {
-      nombre: "Sprint corto",
-      zona: "Velocidad",
-      musculos: "Piernas, glúteos y abdomen",
+      nombre: "Si estás en FORMA — Recomposición corporal",
+      zona: "Por objetivo",
+      musculos: "Mantenimiento calórico + proteína muy alta",
       como: [
-        "Colócate en posición de salida.",
-        "Corre lo más rápido posible durante 20 a 30 metros.",
-        "Descansa y repite."
+        "Calorías: TDEE + 0 a −200 kcal (muy cerca del mantenimiento).",
+        "Proteína: 2.0–2.4 g/kg — la más alta de todos los objetivos.",
+        "Macros: 30–35% proteínas · 40–45% carbohidratos · 25–30% grasas.",
+        "Priorizá proteínas completas: salmón, carne magra, huevos, quinoa, cottage cheese."
       ],
-      repeticiones: "3 series de 5 carreras"
+      repeticiones: "Alimentos clave: salmón, quinoa, carne magra, huevos, cottage cheese, frutas rojas, semillas de chía"
     },
     {
-      nombre: "Saltos laterales",
-      zona: "Velocidad",
-      musculos: "Piernas, glúteos y abdomen",
+      nombre: "Timing: cuándo comer en relación al gym",
+      zona: "Nutrición avanzada",
+      musculos: "Pre-entrenamiento · Durante · Post-entrenamiento · Antes de dormir",
       como: [
-        "Colócate con pies juntos.",
-        "Salta rápidamente de un lado a otro.",
-        "Mantén el equilibrio y rapidez."
+        "PRE (1–2 hs antes): carbohidratos de absorción media + 20–30 g proteína + poca grasa.",
+        "DURANTE: solo agua (500–750 ml). No necesitás nada más en sesiones de menos de 90 min.",
+        "POST (dentro de 2 hs): 30–40 g proteína + carbohidratos para reponer glucógeno muscular.",
+        "ANTES DE DORMIR: caseína (yogur griego, cottage, leche) para recuperación nocturna."
       ],
-      repeticiones: "3 series de 20 segundos"
+      repeticiones: "Ejemplos pre: arroz + pollo, avena + banana + whey. Ejemplos post: batido + banana, pasta con atún"
     },
     {
-      nombre: "Rodillas arriba",
-      zona: "Velocidad",
-      musculos: "Piernas y abdomen",
+      nombre: "Hidratación y Suplementos",
+      zona: "Nutrición avanzada",
+      musculos: "Agua · Whey · Creatina · Cafeína · Vitamina D3 · Omega-3",
       como: [
-        "Corre en el mismo lugar.",
-        "Levanta las rodillas rápidamente hasta la cintura.",
-        "Mantén un ritmo rápido y constante."
+        "AGUA: mínimo 2–3 litros por día. La deshidratación del 2% reduce la fuerza hasta un 10%.",
+        "PROTEÍNA EN POLVO (Whey): 1 scoop = 25 g proteína. Usala si no llegás a tu objetivo con comida real.",
+        "CREATINA MONOHIDRATO: 3–5 g por día. El suplemento más respaldado científicamente. Aumenta fuerza 5–10%.",
+        "CAFEÍNA: 200–400 mg (2–4 cafés). Mejora rendimiento, fuerza y enfoque. No usarla todos los días."
       ],
-      repeticiones: "3 series de 30 segundos"
+      repeticiones: "También recomendados: Vitamina D3 (1,000–2,000 UI/día) · Omega-3 (2–3 g EPA+DHA/día) · Magnesio (200–400 mg antes de dormir)"
     },
     {
-      nombre: "Saltar la cuerda",
-      zona: "Velocidad",
-      musculos: "Piernas, pantorrillas, brazos, hombros y abdomen",
+      nombre: "Errores más comunes en nutrición",
+      zona: "Nutrición avanzada",
+      musculos: "Lo que frena tus resultados",
       como: [
-        "Sujeta la cuerda con ambas manos.",
-        "Mantén los pies juntos y la espalda recta.",
-        "Gira la cuerda con las muñecas.",
-        "Salta ligeramente cada vez que la cuerda pase por debajo.",
-        "Mantén un ritmo rápido y constante."
+        "No comer suficiente proteína: necesitás 1.6–2.4 g/kg todos los días, distribuida en cada comida.",
+        "Dietas muy restrictivas (menos de 1,200 kcal): bajan el metabolismo y tienen efecto rebote garantizado.",
+        "Comer 'saludable' sin contar calorías: el aguacate y los frutos secos también engordan si estás en superávit.",
+        "Creer que el gym compensa la mala dieta: 1 hora de gym quema 400–600 kcal. Una pizza tiene 900+ kcal."
       ],
-      repeticiones: "3 series de 30 segundos"
+      repeticiones: "Regla principal: comé suficiente proteína · controlá las calorías · dormí bien · tomá agua · entrenás con constancia"
+    }
+  ];
+
+  // ─── DATOS: CALENTAMIENTO Y ESTIRAMIENTOS ────────────
+
+  const guiaCalentamiento = [
+    {
+      nombre: "¿Por qué calentar? — Fisiología",
+      zona: "Introducción",
+      musculos: "Todo el cuerpo",
+      como: [
+        "La temperatura muscular sube → los músculos se vuelven más elásticos y menos propensos a desgarrarse.",
+        "El flujo sanguíneo aumenta → más oxígeno y nutrientes llegan a los músculos activos.",
+        "Las articulaciones secretan más líquido sinovial → menos fricción, más protección.",
+        "El sistema nervioso se activa → mejor técnica y más fuerza desde la primera serie."
+      ],
+      repeticiones: "Regla: estiramientos DINÁMICOS antes de entrenar · estiramientos ESTÁTICOS (30–60 seg) solo DESPUÉS del entrenamiento"
+    },
+    {
+      nombre: "Calentamiento General — Cardio leve",
+      zona: "Pre-entrenamiento",
+      musculos: "Sistema cardiovascular · Todo el cuerpo",
+      como: [
+        "CINTA: caminá 2–3 min a paso rápido, luego trote suave 3–5 min. Señal: sudás ligeramente.",
+        "BICICLETA ESTÁTICA: resistencia baja 3 min, aumentá moderadamente 3–5 min. Ideal antes de piernas.",
+        "SOGA: saltos simples 1 min, descansá 30 seg, repetí 2–3 veces. 3 min de soga = 10 de trote.",
+        "REMO ERGÓMETRO: resistencia 3–4 de 10, 20–22 paladas por minuto. Activa piernas, espalda y brazos."
+      ],
+      repeticiones: "Duración: 5–10 minutos de cardio leve antes de cualquier entrenamiento"
+    },
+    {
+      nombre: "Movilidad Articular — De arriba hacia abajo",
+      zona: "Pre-entrenamiento",
+      musculos: "Cuello · Hombros · Codos · Torso · Caderas · Rodillas · Tobillos",
+      como: [
+        "Rotaciones de cuello: 10 círculos lentos por lado. Muy despacio, amplio.",
+        "Círculos de hombros: 15 hacia adelante + 15 hacia atrás. Hacelos GRANDES.",
+        "Rotaciones de torso: 15 por lado con pies al ancho de hombros. Libera tensión lumbar.",
+        "Círculos de caderas (hula hoop): 15 por dirección. La articulación más rígida — no la saltées."
+      ],
+      repeticiones: "Duración: 5–8 minutos de movilidad articular. Orden: cuello → hombros → codos/muñecas → torso → caderas → rodillas → tobillos"
+    },
+    {
+      nombre: "Calentamiento específico — Pecho",
+      zona: "Pre-entrenamiento",
+      musculos: "Pecho · Hombro · Tríceps",
+      como: [
+        "Flexiones de activación: 2 series × 15 reps LENTAS (3 seg bajando). Sentí el pecho encenderse.",
+        "Círculos de brazo: 30 seg hacia adelante + 30 atrás. Los hombros son el eslabón débil del pecho.",
+        "Aperturas con mancuernas muy livianas (2–4 kg): 2 series × 15. Objetivo: abrir el pecho, no trabajarlo.",
+        "Series piramidales con barra: 50% del peso × 15 reps → 70% × 10 → 85% × 5. Después tus series reales."
+      ],
+      repeticiones: "Resultado: más fuerza en las series reales, mejor conexión mente-músculo, menor riesgo de lesión"
+    },
+    {
+      nombre: "Calentamiento específico — Espalda",
+      zona: "Pre-entrenamiento",
+      musculos: "Dorsales · Romboides · Trapecio",
+      como: [
+        "Cat-cow (gato-vaca): 2 series × 10 respiraciones en cuatro patas. Moviliza toda la columna.",
+        "Scapular push-ups: 2 × 15. En posición de plancha, juntá y separás solo los omóplatos.",
+        "Face pulls livianos: 2 × 20 reps con peso ridículo. Activa el hombro trasero y los romboides.",
+        "Jalón liviano: 2 × 20 reps con 40% del peso. Foco: bajar los omóplatos PRIMERO, luego doblar los codos."
+      ],
+      repeticiones: "Objetivo: si no activás los dorsales antes, los bíceps van a dominar el ejercicio"
+    },
+    {
+      nombre: "Calentamiento específico — Hombros",
+      zona: "Pre-entrenamiento",
+      musculos: "Manguito Rotador · Deltoides · Trapecio",
+      como: [
+        "Rotación interna y externa con banda: 2 × 15 por lado con codo a 90°. Activa el manguito rotador.",
+        "Elevaciones laterales ultra-livianas (2–3 kg): 2 × 20 muy lentas. 3 seg subiendo, 3 bajando.",
+        "Péndulo de brazo: 30 seg por brazo, 3 direcciones. Deja que la gravedad haga el trabajo.",
+        "Cruces de brazos al frente: 20 repeticiones. Abre el pecho y mejora la postura."
+      ],
+      repeticiones: "El manguito rotador es lo que estabiliza el hombro. 2 minutos de rotaciones previenen años de recuperación"
+    },
+    {
+      nombre: "Calentamiento específico — Piernas",
+      zona: "Pre-entrenamiento",
+      musculos: "Cuádriceps · Glúteos · Isquios · Cadera",
+      como: [
+        "Air squat (sentadilla sin peso): 3 × 15, bajá lo más profundo posible. Identifica limitaciones de movilidad.",
+        "Leg swings: 20 balanceos adelante-atrás + 20 de lado por pierna. El mejor calentamiento dinámico para piernas.",
+        "Zancadas caminando: 2 × 10 pasos por pierna. Activa equilibrio, cadera y piernas completas.",
+        "Glute bridge: 2 × 15 con 2 seg de pausa arriba. Enciende los glúteos antes de sentadilla o hip thrust."
+      ],
+      repeticiones: "Si hacés sentadilla sin activar glúteos, los isquios y la espalda baja compensan — siempre activá primero"
+    },
+    {
+      nombre: "Estiramientos post-entreno — Pecho y Hombros",
+      zona: "Post-entrenamiento",
+      musculos: "Pecho · Hombro Anterior · Hombro Trasero",
+      como: [
+        "Estiramiento pectoral en pared (90°): 45 seg por lado. Rotá el cuerpo LEJOS de la pared con el brazo fijo.",
+        "Estiramiento pectoral con brazo elevado (135°): 45 seg por lado. Estira el pecho superior y clavícula.",
+        "Estiramiento en mariposa: 60 seg. Manos detrás de la nuca, empujá los codos hacia atrás.",
+        "Estiramiento cruzado (cross-body): 40 seg por lado. Llevá el brazo horizontal y empujá con el otro."
+      ],
+      repeticiones: "Tiempo mínimo: 30 seg por posición. Ideal: 45–60 seg. Respirá lento y profundo — con cada exhalación relajáte más"
+    },
+    {
+      nombre: "Estiramientos post-entreno — Espalda",
+      zona: "Post-entrenamiento",
+      musculos: "Dorsales · Espalda Baja · Columna · Trapecio",
+      como: [
+        "Child's pose (postura de niño): 60 seg. Brazos extendidos adelante, frente al suelo. Para dorsales: caminá las manos a un lado.",
+        "Estiramiento de dorsal en pie: 45 seg por lado. Agarrá un rack, alejáte y deja que el cuerpo tire del dorsal.",
+        "Rotación espinal acostado: 45 seg por lado. Rodillas al costado, hombros pegados al suelo.",
+        "Estiramiento trapecio y cuello: 30 seg por lado. Oreja al hombro con presión suave de la mano."
+      ],
+      repeticiones: "La rotación espinal es el mejor antídoto contra el dolor lumbar post-entrenamiento. No la saltées"
+    },
+    {
+      nombre: "Estiramientos post-entreno — Piernas",
+      zona: "Post-entrenamiento",
+      musculos: "Cuádriceps · Isquiotibiales · Glúteos · Gemelos · Flexores de cadera",
+      como: [
+        "Cuádriceps de pie: 45 seg por pierna. Talón hacia glúteos, rodillas juntas, cadera hacia adelante.",
+        "Isquiotibiales acostado con banda: 60 seg por pierna. Pierna al techo, completamente relajada.",
+        "Glúteos figura 4: 60 seg por lado. Tobillo cruzado sobre rodilla, jalá la pierna hacia el pecho.",
+        "Flexores de cadera (caballero): 45 seg por lado. Rodilla en suelo, empujá la cadera hacia adelante."
+      ],
+      repeticiones: "El estiramiento de flexores de cadera es el más importante: el psoas acortado causa dolor lumbar, mala postura y mala sentadilla"
+    },
+    {
+      nombre: "Rutina Exprés — 5 minutos",
+      zona: "Rutinas completas",
+      musculos: "Todo el cuerpo · Para cuando estás apurado",
+      como: [
+        "Estiramiento de pecho en pared (ambos lados): 45 seg.",
+        "Estiramiento de tríceps overhead (ambos lados): 40 seg.",
+        "Child's pose: 45 seg.",
+        "Estiramiento de cuádriceps de pie (ambos lados): 50 seg.",
+        "Isquiotibiales sentado (ambos lados): 60 seg.",
+        "Gemelos en pared (ambos lados): 60 seg."
+      ],
+      repeticiones: "5 minutos de estiramiento son infinitamente mejor que 0. Con el tiempo, tu cuerpo lo va a agradecer"
+    },
+    {
+      nombre: "Rutina Estándar — 10 minutos",
+      zona: "Rutinas completas",
+      musculos: "Todo el cuerpo · La rutina ideal para después de cualquier entrenamiento",
+      como: [
+        "Estiramiento de cuello lateral: 30 seg × 2 lados.",
+        "Estiramiento cruzado de hombro: 40 seg × 2 lados.",
+        "Estiramiento de bíceps en pared + tríceps overhead: 40 seg × 2 lados cada uno.",
+        "Child's pose · Rotación espinal · Glúteos figura 4 · Flexores de cadera: 45–60 seg × 2 lados.",
+        "Cuádriceps en suelo + isquiotibiales con banda: 45–60 seg × 2 lados.",
+        "Gemelos (gastrocnemio + sóleo) + aductores en mariposa: 45–60 seg."
+      ],
+      repeticiones: "10 minutos post-entrenamiento reducen el dolor muscular del día siguiente hasta un 40%"
+    },
+    {
+      nombre: "Errores más comunes al estirar",
+      zona: "Errores a evitar",
+      musculos: "Lo que reduce el efecto de los estiramientos",
+      como: [
+        "Estirar en frío: los estiramientos estáticos largos van DESPUÉS del entrenamiento, nunca antes.",
+        "Rebotar durante el estiramiento: el rebote activa el reflejo miotático — el músculo se contrae para protegerse.",
+        "Aguantar la respiración: respirá lento y profundo. Con cada exhalación el músculo se relaja más.",
+        "Tiempos muy cortos: mínimo 30 seg para adaptación. Ideal 45–60 seg."
+      ],
+      repeticiones: "Consistencia es todo: 10 minutos todos los días > 1 hora una vez por semana. La flexibilidad mejora con repetición, no con sesiones aisladas"
     }
   ];
 
@@ -666,7 +1211,7 @@
     document.getElementById("modalInfo").classList.remove("active");
   }
 
-  // ─── LOGIN / REGISTRO ─────────────────────────────────
+  // ─── LOGIN ────────────────────────────────────────────
 
   function resetLogin() {
     document.getElementById("email").value    = "";
@@ -709,46 +1254,24 @@
 
   // ─── CONTENIDO ────────────────────────────────────────
 
-  const introFuncional = {
-    titulo: "Ejercicios en casa",
-    descripcion: "Realización de actividades físicas dentro del hogar o en espacios cercanos, utilizando el propio peso corporal o materiales sencillos, con el objetivo de mejorar la salud, la condición física y el bienestar general.",
-    beneficios: [
-      "Mejora la salud cardiovascular.",
-      "Ayuda a fortalecer músculos y huesos.",
-      "Reduce el estrés y la ansiedad.",
-      "Mejora la postura y la coordinación.",
-      "Favorece el control del peso corporal.",
-      "Incrementa la energía y la concentración.",
-      "Mejora la calidad del sueño."
-    ],
-    ventajas: [
-      "No requiere pagar gimnasio.",
-      "Se puede realizar en cualquier horario.",
-      "Ahorra tiempo de traslado.",
-      "Permite entrenar con comodidad y privacidad.",
-      "Puede adaptarse al nivel físico de cada persona.",
-      "Se necesitan pocos materiales o ninguno."
-    ]
-  };
-
-  function abrirContenido(titulo, ejercicios) {
+  function abrirContenido(titulo, items) {
     mostrarSeccion("contenido");
     document.getElementById("tituloContenido").innerText = titulo;
     const lista = document.getElementById("listaEjercicios");
     lista.innerHTML = "";
 
-    // Sub-encabezado solo para Entrenamiento Funcional
-    if (titulo === "Entrenamiento Funcional") {
+    // Intro especial para Entrenamiento en Casa
+    if (titulo === "Entrenamiento en Casa") {
       const intro = document.createElement("div");
       intro.className = "bg-white/5 border border-white/10 rounded-2xl p-6 mb-2";
-      const bens = introFuncional.beneficios.map(b => `<li class="flex items-start gap-2 text-gray-300 text-sm"><span class="text-[#AD1524] mt-0.5 shrink-0">➢</span>${b}</li>`).join("");
-      const vents = introFuncional.ventajas.map(v => `<li class="flex items-start gap-2 text-gray-300 text-sm"><span class="text-[#AD1524] mt-0.5 shrink-0">➢</span>${v}</li>`).join("");
+      const bens = introEnCasa.beneficios.map(b => `<li class="flex items-start gap-2 text-gray-300 text-sm"><span class="text-[#AD1524] mt-0.5 shrink-0">➢</span>${b}</li>`).join("");
+      const vents = introEnCasa.ventajas.map(v => `<li class="flex items-start gap-2 text-gray-300 text-sm"><span class="text-[#AD1524] mt-0.5 shrink-0">➢</span>${v}</li>`).join("");
       intro.innerHTML = `
         <div class="flex items-center gap-2 mb-3">
           <span class="text-lg">🏠</span>
-          <h3 class="text-base font-bold text-white">${introFuncional.titulo}</h3>
+          <h3 class="text-base font-bold text-white">${introEnCasa.titulo}</h3>
         </div>
-        <p class="text-gray-400 text-sm leading-relaxed mb-4">${introFuncional.descripcion}</p>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">${introEnCasa.descripcion}</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <p class="text-xs font-semibold text-[#f87171] uppercase tracking-widest mb-2">Beneficios</p>
@@ -762,14 +1285,13 @@
       `;
       lista.appendChild(intro);
 
-      // Separador antes de los ejercicios
       const sep = document.createElement("p");
       sep.className = "text-xs font-semibold text-gray-500 uppercase tracking-widest mt-2 mb-1 px-1";
       sep.innerText = "Ejercicios";
       lista.appendChild(sep);
     }
 
-    ejercicios.forEach(ej => {
+    items.forEach(ej => {
       const pasos = ej.como.map(p => `<li class="text-gray-300 text-sm">• ${p}</li>`).join("");
       const item = document.createElement("div");
       item.className = "bg-white/5 backdrop-blur-md border border-white/10 p-5 rounded-xl hover:border-[#AD1524]/40 transition";
@@ -778,9 +1300,10 @@
           <h3 class="font-semibold text-base">${ej.nombre}</h3>
           <span class="text-xs bg-[#AD1524]/20 text-[#f87171] border border-[#AD1524]/30 px-2 py-0.5 rounded-full whitespace-nowrap">${ej.zona}</span>
         </div>
-        <p class="text-gray-400 text-xs mb-3">💪 <span class="font-medium">Músculos:</span> ${ej.musculos}</p>
+        <p class="text-gray-400 text-xs mb-3">💪 <span class="font-medium">Músculos / Área:</span> ${ej.musculos}</p>
         <ul class="space-y-1 mb-3">${pasos}</ul>
         <p class="text-[#AD1524] text-xs font-semibold">🔁 ${ej.repeticiones}</p>
+        ${ej.tip ? `<p class="text-gray-500 text-xs mt-2">💡 ${ej.tip}</p>` : ''}
       `;
       lista.appendChild(item);
     });
@@ -925,7 +1448,7 @@
   }
 
   function cancelarEdicion() {
-    editandoIndex = null;
+    editandoId = null;
   }
 
   // ─── INIT ─────────────────────────────────────────────
